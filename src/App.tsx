@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronDown, ChevronRight } from 'lucide-react';
-import { SpeedInsights } from "@vercel/speed-insights/react";
-
+import { Canvas, useFrame } from '@react-three/fiber';
+// NOTE: Uncomment 'useGLTF' below when you are ready to load your custom 3D model
+import { Environment, Float, ContactShadows, useGLTF } from '@react-three/drei'; 
+import * as THREE from 'three';
 
 // --- Types ---
 interface Product {
@@ -10,7 +12,7 @@ interface Product {
   type: string;
   tagline: string;
   description: string;
-  price: string | null; // Allow null for "Om oss"
+  price: string | null;
   heroImage: string;
   detailImage1: string;
   detailImage2: string;
@@ -26,7 +28,7 @@ interface ButtonProps {
   className?: string;
 }
 
-// --- Data: The Exclusive Collection ---
+// --- Data ---
 const COLLECTION: Product[] = [
   {
     id: 'nattbord',
@@ -35,9 +37,10 @@ const COLLECTION: Product[] = [
     tagline: 'Quiet companion for the night.',
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
     price: 'From €850',
-    heroImage: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80&w=2070',
-    detailImage1: 'https://images.unsplash.com/photo-1505693416388-b0346efee535?auto=format&fit=crop&q=80&w=2070',
-    detailImage2: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=2070',
+    // Note: In Vite, files in 'public/images/' are accessed as '/images/'
+    heroImage: '/images/nattbord_natur.jpg',
+    detailImage1: '/images/nattbord_produksjon.jpg',
+    detailImage2: '/images/nattbord_produksjon.jpg',
     features: ['Smoked Oak', 'Soft-Close', 'Integrated Charging'],
     shopifyLink: '#shopify-nattbord'
   },
@@ -134,7 +137,46 @@ const COLLECTION: Product[] = [
   }
 ];
 
-// --- Components ---
+// --- 3D Components ---
+
+// REPLACE 3D MODEL HERE:
+const PlaceholderModel: React.FC<{ scrollProgress: number }> = ({ scrollProgress }) => {
+  const meshRef = useRef<THREE.Group>(null);
+  
+  // --- UNCOMMENT THIS SECTION TO USE YOUR MODEL ---
+   const { scene } = useGLTF('/models/nattbord.glb'); 
+  
+  useFrame((_, delta) => {
+    if (meshRef.current) {
+      // Scroll Interaction: 
+      // Rotate 45 degrees total (from -22.5 to +22.5 degrees) based on scroll progress
+      const targetRotationY = -Math.PI / 8 + (scrollProgress * (Math.PI / 4));
+      
+      // Optional: Slight tilt (15 degrees) on X axis to show top surface as you scroll
+      const targetRotationX = scrollProgress * (Math.PI / 12);
+
+      // Smooth dampening to reach target
+      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, delta * 4);
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, delta * 4);
+    }
+  });
+
+  return (
+    <group ref={meshRef}>
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+        
+        {/* --- UNCOMMENT THIS TO SHOW YOUR MODEL --- */}
+        { <primitive object={scene} scale={2} /> }
+
+        
+
+      </Float>
+      <ContactShadows opacity={0.4} scale={10} blur={2.5} far={4} />
+    </group>
+  );
+};
+
+// --- Standard UI Components ---
 
 const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, className = '' }) => {
   const baseClass = "inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-full tracking-wide cursor-pointer whitespace-nowrap";
@@ -143,7 +185,6 @@ const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, class
   
   const Component = href ? 'a' : 'button';
   
-  // Cast properties to any to avoid strict TS conflicts with dynamic element types
   const props: any = {
     onClick,
     className: `${baseClass} ${primary ? primaryClass : secondaryClass} ${className}`
@@ -169,7 +210,7 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
   );
 };
 
-// --- Sections ---
+// --- Page Sections ---
 
 const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
   <div className="relative h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center">
@@ -195,7 +236,158 @@ const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
   </div>
 );
 
-const ProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
+// --- The Nattbord Experience (Apple Style Layered Mixed Media) ---
+const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const { top, height } = containerRef.current.getBoundingClientRect();
+      const progress = Math.min(Math.max(-top / (height - window.innerHeight), 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="bg-[#110614] text-white w-full">
+      {/* 1. Title Screen */}
+      <div className="h-screen w-full flex flex-col items-center justify-center relative px-6 z-10">
+        <FadeIn delay={300}>
+          <h1 className="text-6xl md:text-9xl font-bold tracking-tight mb-4 text-center font-ubuntu lowercase">
+            {product.name}
+          </h1>
+          <div className="h-1 w-24 bg-white/20 mx-auto rounded-full"></div>
+        </FadeIn>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
+            <ChevronDown size={32} />
+        </div>
+      </div>
+
+      {/* 2. Layered Scrollytelling Section */}
+      <div ref={containerRef} className="relative grid grid-cols-1">
+        
+        {/* Layer A: Sticky 3D Model (Pinned to right) */}
+        <div className="col-start-1 row-start-1 h-screen sticky top-0 pointer-events-none z-0">
+           <div className="absolute right-0 w-full md:w-1/2 h-full">
+              <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+                 <color attach="background" args={['#110614']} />
+                 <ambientLight intensity={0.5} />
+                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+                 <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                 <Environment preset="city" />
+                 <PlaceholderModel scrollProgress={scrollProgress} />
+              </Canvas>
+           </div>
+        </div>
+
+        {/* Layer B: Content Blocks (Scrolls over Layer A) */}
+        <div className="col-start-1 row-start-1 z-10 relative">
+             
+             {/* Block 1: Text */}
+            <div className="min-h-screen flex items-center px-12 md:px-24">
+                 <div className="w-full md:w-1/2">
+                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
+                    <p className="text-xl text-gray-300 leading-relaxed font-light">
+                        Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
+                    </p>
+                 </div>
+            </div>
+
+            {/* Block 2: Full Width Image (Opaque, covers model) */}
+            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
+               <img 
+                 src={product.heroImage} 
+                 alt="Hero" 
+                 className="w-full h-full object-cover opacity-90"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-[#110614] via-transparent to-[#110614]/50"></div>
+               <div className="absolute bottom-20 left-12 md:left-24 max-w-lg">
+                  <h3 className="text-3xl font-light italic font-ubuntu">"A silhouette that defines the room."</h3>
+               </div>
+            </div>
+
+            {/* Block 3: Text */}
+            <div className="min-h-screen flex items-center px-12 md:px-24">
+                 <div className="w-full md:w-1/2">
+                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Silent Motion.</h2>
+                    <p className="text-xl text-gray-300 leading-relaxed font-light">
+                        Precision-engineered soft-close hinges ensure your peace is never disturbed. The drawer glides effortlessly, respecting the silence of your sanctuary.
+                    </p>
+                 </div>
+            </div>
+
+            {/* Block 4: Full Width Image */}
+            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
+               <img 
+                 src={product.detailImage1} 
+                 alt="Detail" 
+                 className="w-full h-full object-cover"
+               />
+            </div>
+
+            {/* Block 5: Text */}
+             <div className="min-h-screen flex items-center px-12 md:px-24">
+                 <div className="w-full md:w-1/2">
+                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Integrated Power.</h2>
+                    <p className="text-xl text-gray-300 leading-relaxed font-light">
+                        Hidden cable management and optional wireless charging integration keep your devices ready for the morning without cluttering your night.
+                    </p>
+                 </div>
+            </div>
+
+            {/* Block 6: Detail Image + Quote */}
+            <div className="w-full min-h-screen bg-[#110614] flex flex-col justify-center">
+                <div className="px-6 md:px-12 mb-12 text-center max-w-4xl mx-auto">
+                    <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
+                </div>
+               <div className="w-full h-[70vh] relative overflow-hidden">
+                  <img 
+                    src={product.detailImage2} 
+                    alt="Lifestyle" 
+                    className="w-full h-full object-cover"
+                  />
+               </div>
+            </div>
+
+        </div>
+      </div>
+
+      {/* 4. Specs / Detail Grid */}
+      <div className="py-32 px-6 max-w-7xl mx-auto bg-[#110614] relative z-20">
+        <h3 className="text-4xl font-ubuntu mb-16 text-center">Technical Specifications</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Dimensions</h4>
+                <p className="text-3xl font-light">45 x 45 x 60 cm</p>
+                <p className="text-sm text-gray-500 mt-2">Width x Depth x Height</p>
+            </div>
+            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Material</h4>
+                <p className="text-3xl font-light">Solid Oak</p>
+                <p className="text-sm text-gray-500 mt-2">FSC Certified</p>
+            </div>
+            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Weight</h4>
+                <p className="text-3xl font-light">12 kg</p>
+                <p className="text-sm text-gray-500 mt-2">Solid construction</p>
+            </div>
+        </div>
+      </div>
+      
+      {/* 5. Final CTA */}
+      <div className="pb-32 text-center bg-[#110614] relative z-20">
+         <Button primary href={product.shopifyLink}>Configure Yours</Button>
+      </div>
+    </div>
+  );
+}
+
+const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
   // Reset scroll when product changes
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -205,7 +397,7 @@ const ProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
 
   return (
     <div className="min-h-screen bg-[#110614] text-white w-full">
-      {/* 1. Solid Cover Screen (Typography Focus) */}
+      {/* 1. Solid Cover Screen */}
       <div className="h-screen w-full bg-[#110614] flex flex-col items-center justify-center relative px-6">
         <FadeIn delay={300}>
           <h1 className="text-6xl md:text-9xl font-bold tracking-tight mb-4 text-center font-ubuntu lowercase">
@@ -219,9 +411,8 @@ const ProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
         </div>
       </div>
 
-      {/* 2. Hero Image & Key Details (Scroll to reveal) */}
+      {/* 2. Hero Image & Key Details */}
       <div className="min-h-screen w-full relative flex flex-col md:flex-row">
-         {/* Image Side */}
          <div className="w-full md:w-1/2 h-[50vh] md:h-auto relative">
             <img 
                 src={product.heroImage} 
@@ -231,7 +422,6 @@ const ProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
             <div className="absolute inset-0 bg-black/10"></div>
          </div>
 
-         {/* Content Side */}
          <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#110614]">
              <FadeIn>
                 {!isAboutPage && (
@@ -439,7 +629,6 @@ export default function App() {
                 <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-white transform origin-left transition-transform duration-300 ${activeProduct?.id === item.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </button>
             ))}
-            <SpeedInsights />
           </div>
         </div>
       </nav>
@@ -447,7 +636,11 @@ export default function App() {
       {/* Main Content */}
       <main className="w-full">
         {activeProduct ? (
-          <ProductShowcase product={activeProduct} />
+          activeProduct.id === 'nattbord' ? (
+             <NattbordExperience product={activeProduct} />
+          ) : (
+             <DefaultProductShowcase product={activeProduct} />
+          )
         ) : (
           <LandingHero onExplore={() => navigateToProduct(COLLECTION[0])} />
         )}
