@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown, ChevronRight } from 'lucide-react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 
 // --- Types ---
 interface Product {
@@ -438,6 +439,7 @@ export default function App() {
                 <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-white transform origin-left transition-transform duration-300 ${activeProduct?.id === item.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </button>
             ))}
+            <SpeedInsights />
           </div>
         </div>
       </nav>
