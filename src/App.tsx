@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown, ChevronRight } from 'lucide-react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // --- Types ---
 interface Product {
