@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Utility to hide scrollbars but keep functionality 
+  Used for the mobile navigation menu
+*/
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Optional: Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
