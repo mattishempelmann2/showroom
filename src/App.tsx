@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ChevronDown, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
 import { Canvas, useFrame } from '@react-three/fiber';
 // NOTE: Uncomment 'useGLTF' below when you are ready to load your custom 3D model
 import { Environment, Float, ContactShadows, useGLTF } from '@react-three/drei'; 
@@ -29,6 +29,9 @@ interface ButtonProps {
 }
 
 // --- Data ---
+// REPLACE IMAGES HERE:
+// 1. Place your images in the 'public' folder of your Vite project (e.g., public/images/nattbord.jpg)
+// 2. Reference them here as strings: '/images/nattbord.jpg'
 const COLLECTION: Product[] = [
   {
     id: 'nattbord',
@@ -37,12 +40,12 @@ const COLLECTION: Product[] = [
     tagline: 'Quiet companion for the night.',
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
     price: 'From €850',
-    // Note: In Vite, files in 'public/images/' are accessed as '/images/'
+    // Replace these URLs with your local file paths
     heroImage: '/images/nattbord_natur.jpg',
     detailImage1: '/images/nattbord_produksjon.jpg',
     detailImage2: '/images/vintereik.jpg',
     features: ['Smoked Oak', 'Soft-Close', 'Integrated Charging'],
-    shopifyLink: '#shopify-nattbord'
+    shopifyLink: 'https://nordlys-moebler-2.myshopify.com/en/products/skrivebord'
   },
   {
     id: 'skrivebord',
@@ -168,7 +171,9 @@ const PlaceholderModel: React.FC<{ scrollProgress: number }> = ({ scrollProgress
         {/* --- UNCOMMENT THIS TO SHOW YOUR MODEL --- */}
         { <primitive object={scene} scale={2} /> }
 
+        {/* --- REMOVE THIS ENTIRE MESH BLOCK WHEN YOU HAVE YOUR MODEL --- */}
         
+        {/* --- END MESH BLOCK --- */}
 
       </Float>
       <ContactShadows opacity={0.4} scale={10} blur={2.5} far={4} />
@@ -218,8 +223,8 @@ const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
       <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">Nordlys Collection</p>
     </FadeIn>
     <FadeIn delay={400}>
-      <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white font-ubuntu">
-        nordlys
+      <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white font-ubuntu lowercase">
+        nordlys møbler
       </h1>
     </FadeIn>
     <FadeIn delay={600}>
@@ -240,6 +245,14 @@ const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
 const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -271,11 +284,11 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       {/* 2. Layered Scrollytelling Section */}
       <div ref={containerRef} className="relative grid grid-cols-1">
         
-        {/* Layer A: Sticky 3D Model (Pinned to right) */}
+        {/* Layer A: Sticky 3D Model (Pinned to right on desktop, centered/smaller on mobile) */}
         <div className="col-start-1 row-start-1 h-screen sticky top-0 pointer-events-none z-0">
            <div className="absolute right-0 w-full md:w-1/2 h-full">
-              <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-                 <color attach="background" args={['#110614']} />
+              <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
+                 {/* Only lighting here, background transparent to blend */}
                  <ambientLight intensity={0.5} />
                  <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                  <pointLight position={[-10, -10, -10]} intensity={0.5} />
@@ -514,6 +527,7 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
 
 export default function App() {
   const [activeProduct, setActiveProduct] = useState<Product | null>(null); // null = Landing Page
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   // Handle scroll for nav bar transparency
@@ -525,11 +539,13 @@ export default function App() {
 
   const navigateToProduct = (product: Product) => {
     setActiveProduct(product);
+    setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
   const navigateHome = () => {
     setActiveProduct(null);
+    setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
@@ -582,20 +598,25 @@ export default function App() {
             font-size: 2.25rem !important; /* ~text-4xl */
         }
 
-        /* Aggressive Reset for Navigation Buttons to Remove "Vite Blue Glow" */
-        nav button {
+        /* Aggressive Reset for Navigation & Overlay Buttons to Remove "Vite Blue Glow" */
+        nav button,
+        .menu-overlay button {
           background-color: transparent !important;
           border: none !important;
           outline: none !important;
           box-shadow: none !important;
-          padding: 0.5rem 0 !important; /* Adjust padding to look like text */
+          padding: 0.5rem 0 !important;
           margin: 0 !important;
           border-radius: 0 !important;
         }
         nav button:focus,
         nav button:focus-visible,
         nav button:active,
-        nav button:hover {
+        nav button:hover,
+        .menu-overlay button:focus,
+        .menu-overlay button:focus-visible,
+        .menu-overlay button:active,
+        .menu-overlay button:hover {
           outline: none !important;
           box-shadow: none !important;
           background-color: transparent !important;
@@ -606,32 +627,69 @@ export default function App() {
       {/* Navigation Bar - Always Visible */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#110614]/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
+          scrolled || isMenuOpen ? 'bg-[#110614]/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-screen-2xl mx-auto h-20 flex items-center justify-between px-6 w-full">
-          {/* Logo */}
-          <button onClick={navigateHome} className="nav-logo text-4xl font-bold tracking-tighter text-white mr-8 shrink-0 appearance-none bg-transparent border-none p-0 cursor-pointer font-ubuntu lowercase">
-            nordlys
+        <div className="relative max-w-screen-2xl mx-auto h-20 flex items-center justify-between px-6 w-full">
+          
+          {/* Hamburger Menu (Left) */}
+          <button 
+            onClick={() => setIsMenuOpen(true)} 
+            className="text-white p-2 z-50 hover:text-gray-300 transition-colors"
+            aria-label="Open Menu"
+          >
+            <Menu size={32} />
           </button>
 
-          {/* Nav Items - Scrollable on mobile, Centered/Flex on desktop */}
-          <div className="flex-1 flex items-center justify-start md:justify-center overflow-x-auto gap-8 no-scrollbar mask-gradient md:mask-none px-2 w-full">
-            {COLLECTION.map(item => (
-              <button 
-                key={item.id}
-                onClick={() => navigateToProduct(item)}
-                className={`text-sm tracking-wide font-light transition-all duration-300 whitespace-nowrap relative group py-2 bg-transparent border-none appearance-none outline-none cursor-pointer font-ubuntu lowercase ${
-                  activeProduct?.id === item.id ? 'text-white' : 'text-white/60 hover:text-white'
-                }`}
-              >
-                {item.name}
-                <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-white transform origin-left transition-transform duration-300 ${activeProduct?.id === item.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
-              </button>
-            ))}
-          </div>
+          {/* Logo (Absolute Center) */}
+          <button 
+            onClick={navigateHome} 
+            className="absolute left-1/2 transform -translate-x-1/2 nav-logo text-4xl font-bold tracking-tighter text-white appearance-none bg-transparent border-none p-0 cursor-pointer font-ubuntu lowercase z-50 whitespace-nowrap"
+          >
+            nordlys møbler
+          </button>
+
+          {/* Empty spacer to balance flex if needed, or Cart icon later */}
+          <div className="w-8"></div>
         </div>
       </nav>
+
+      {/* Full Screen Menu Overlay */}
+      <div className={`menu-overlay fixed inset-0 z-50 bg-[#110614] transition-all duration-500 ease-in-out ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        {/* Close Button */}
+        <button 
+            onClick={() => setIsMenuOpen(false)} 
+            className="absolute top-6 left-6 text-white p-2 hover:text-gray-300 transition-colors"
+        >
+            <X size={32} />
+        </button>
+
+        <div className="h-full w-full flex flex-col justify-center items-center overflow-y-auto py-12">
+            <div className="flex flex-col gap-2 md:gap-4 text-center w-full px-4">
+                <button 
+                    onClick={navigateHome} 
+                    className={`text-5xl md:text-8xl font-bold font-ubuntu mb-2 bg-transparent border-none p-0 cursor-pointer ${
+                        !activeProduct ? 'text-white underline decoration-2 underline-offset-8' : 'text-gray-400 hover:text-white'
+                    }`}
+                >
+                    Home
+                </button>
+                {COLLECTION.map(item => (
+                    <button 
+                        key={item.id}
+                        onClick={() => navigateToProduct(item)}
+                        className={`text-6xl md:text-8xl font-bold font-ubuntu lowercase bg-transparent border-none p-0 cursor-pointer transition-all duration-300 leading-tight ${
+                            activeProduct?.id === item.id 
+                            ? 'text-white underline decoration-2 underline-offset-8' 
+                            : 'text-gray-400 hover:text-white'
+                        }`}
+                    >
+                        {item.name}
+                    </button>
+                ))}
+            </div>
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="w-full">
