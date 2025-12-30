@@ -29,9 +29,6 @@ interface ButtonProps {
 }
 
 // --- Data ---
-// REPLACE IMAGES HERE:
-// 1. Place your images in the 'public' folder of your Vite project (e.g., public/images/nattbord.jpg)
-// 2. Reference them here as strings: '/images/nattbord.jpg'
 const COLLECTION: Product[] = [
   {
     id: 'nattbord',
@@ -40,7 +37,6 @@ const COLLECTION: Product[] = [
     tagline: 'Quiet companion for the night.',
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
     price: 'From €850',
-    // Replace these URLs with your local file paths
     heroImage: '/images/nattbord_natur.jpg',
     detailImage1: '/images/nattbord_produksjon.jpg',
     detailImage2: '/images/vintereik.jpg',
@@ -142,12 +138,11 @@ const COLLECTION: Product[] = [
 
 // --- 3D Components ---
 
-// REPLACE 3D MODEL HERE:
 const PlaceholderModel: React.FC<{ scrollProgress: number }> = ({ scrollProgress }) => {
   const meshRef = useRef<THREE.Group>(null);
   
-  // --- UNCOMMENT THIS SECTION TO USE YOUR MODEL ---
-   const { scene } = useGLTF('/models/nattbord.glb'); 
+  // Custom model loaded
+  const { scene } = useGLTF('/models/nattbord.glb'); 
   
   useFrame((_, delta) => {
     if (meshRef.current) {
@@ -167,14 +162,7 @@ const PlaceholderModel: React.FC<{ scrollProgress: number }> = ({ scrollProgress
   return (
     <group ref={meshRef}>
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        
-        {/* --- UNCOMMENT THIS TO SHOW YOUR MODEL --- */}
-        { <primitive object={scene} scale={2} /> }
-
-        {/* --- REMOVE THIS ENTIRE MESH BLOCK WHEN YOU HAVE YOUR MODEL --- */}
-        
-        {/* --- END MESH BLOCK --- */}
-
+        <primitive object={scene} scale={2} />
       </Float>
       <ContactShadows opacity={0.4} scale={10} blur={2.5} far={4} />
     </group>
@@ -560,6 +548,19 @@ export default function App() {
             font-family: 'Ubuntu', sans-serif;
         }
 
+        /* Responsive Large Menu Text - BYPASSING TAILWIND */
+        .menu-text-responsive {
+            font-size: 6vh;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+        @media (min-width: 768px) {
+            .menu-text-responsive {
+                font-size: 9vh; /* Massive desktop size */
+            }
+        }
+
         /* Reset Vite Default Layout Constraints */
         :root {
           max-width: none !important;
@@ -630,7 +631,7 @@ export default function App() {
           scrolled || isMenuOpen ? 'bg-[#110614]/95 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
         }`}
       >
-        <div className="relative max-w-screen-2xl mx-auto h-20 flex items-center justify-between px-6 w-full">
+        <div className="relative w-full h-20 flex items-center justify-between px-6">
           
           {/* Hamburger Menu (Left) */}
           <button 
@@ -659,35 +660,34 @@ export default function App() {
         {/* Close Button */}
         <button 
             onClick={() => setIsMenuOpen(false)} 
-            className="absolute top-6 left-6 text-white p-2 hover:text-gray-300 transition-colors"
+            className="absolute top-6 left-6 text-white p-2 hover:text-gray-300 transition-colors z-50"
         >
             <X size={32} />
         </button>
 
-        <div className="h-full w-full flex flex-col justify-center items-center overflow-y-auto py-12">
-            <div className="flex flex-col gap-2 md:gap-4 text-center w-full px-4">
+        <div className="h-full w-full flex flex-col justify-evenly items-start py-12 pl-6 md:pl-12 pr-4">
+            <button 
+                onClick={navigateHome} 
+                className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu uppercase bg-transparent border-none cursor-pointer transition-all duration-300 ${
+                    !activeProduct ? 'text-white underline decoration-2 underline-offset-8' : 'text-gray-400 hover:text-white hover:scale-105 origin-left'
+                }`}
+            >
+                Home
+            </button>
+            
+            {COLLECTION.map(item => (
                 <button 
-                    onClick={navigateHome} 
-                    className={`text-5xl md:text-8xl font-bold font-ubuntu mb-2 bg-transparent border-none p-0 cursor-pointer ${
-                        !activeProduct ? 'text-white underline decoration-2 underline-offset-8' : 'text-gray-400 hover:text-white'
+                    key={item.id}
+                    onClick={() => navigateToProduct(item)}
+                    className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu lowercase bg-transparent border-none cursor-pointer transition-all duration-300 ${
+                        activeProduct?.id === item.id 
+                        ? 'text-white underline decoration-2 underline-offset-8' 
+                        : 'text-gray-400 hover:text-white hover:scale-105 origin-left'
                     }`}
                 >
-                    Home
+                    {item.name}
                 </button>
-                {COLLECTION.map(item => (
-                    <button 
-                        key={item.id}
-                        onClick={() => navigateToProduct(item)}
-                        className={`text-6xl md:text-8xl font-bold font-ubuntu lowercase bg-transparent border-none p-0 cursor-pointer transition-all duration-300 leading-tight ${
-                            activeProduct?.id === item.id 
-                            ? 'text-white underline decoration-2 underline-offset-8' 
-                            : 'text-gray-400 hover:text-white'
-                        }`}
-                    >
-                        {item.name}
-                    </button>
-                ))}
-            </div>
+            ))}
         </div>
       </div>
 
