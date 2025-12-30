@@ -40,7 +40,7 @@ const COLLECTION: Product[] = [
     // Note: In Vite, files in 'public/images/' are accessed as '/images/'
     heroImage: '/images/nattbord_natur.jpg',
     detailImage1: '/images/nattbord_produksjon.jpg',
-    detailImage2: '/images/nattbord_produksjon.jpg',
+    detailImage2: '/images/vintereik.jpg',
     features: ['Smoked Oak', 'Soft-Close', 'Integrated Charging'],
     shopifyLink: '#shopify-nattbord'
   },
