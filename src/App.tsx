@@ -14,11 +14,11 @@ interface Product {
   description: string;
   price: string | null;
   heroImage: string;
-  heroImageMobile?: string; // New: Dedicated mobile hero
+  heroImageMobile?: string;
   detailImage1: string;
-  detailImage1Mobile?: string; // New: Dedicated mobile detail
+  detailImage1Mobile?: string;
   detailImage2: string;
-  detailImage2Mobile?: string; // New: Dedicated mobile detail
+  detailImage2Mobile?: string;
   features: string[];
   shopifyLink: string;
 }
@@ -41,7 +41,7 @@ const COLLECTION: Product[] = [
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
     price: 'From €850',
     heroImage: '/images/nattbord_natur.jpg',
-    heroImageMobile: '/images/nattbord_natur.jpg', // Example of mobile specific image
+    heroImageMobile: '/images/nattbord_natur.jpg',
     detailImage1: '/images/nattbord_produksjon.jpg',
     detailImage1Mobile: '/images/prod_mobile.jpg',
     detailImage2: '/images/vintereik.jpg',
@@ -236,14 +236,32 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
   );
 };
 
-// --- New Component: Nordlys Pictogram Animation ---
+// --- New Component: Nordlys Pictogram Animation (FIXED: JS CALCULATION) ---
+
+// 1. Paste your QCAD Export Data Here
+const SVG_VIEWBOX = "-1663.1228 -1093.5197 3787.7549 1176"; 
+const SVG_PATH = "m 1532.8451,925.0197 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -353,115 h 353 m -353,-119 h 353 m -353,4 h 353 m -353,-119 h 353 m -161.5,325.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-342 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,1176 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-22 h 321 m -321,4 h 321 m -337,-20 v -99 m 16,115 a 16,16 0 0 1 -16,-16 m 353,0 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -353,-361 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -16,-498 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,357 v -115 m 353,115 v -115 m -375,-222 a 38,38 0 0 1 38,-38 m -38,954 v -916 m 18,0 a 20,20 0 0 1 20,-20 m 0,956 a 20,20 0 0 1 -20,-20 m 0,0 v -916 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 46,833 h 291 m -337,-361 h 353 m -353,242 h 353 m -353,-361 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,813 a 38,38 0 0 1 -38,38 m 38,-38 v -916 m -38,-20 a 20,20 0 0 1 20,20 m 0,916 a 20,20 0 0 1 -20,20 m 20,-20 v -916 m -1463.476,428.5 v -15 m 30,15 v -15 m -30,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,-31.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,325.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-342 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,579 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-460 a 38,38 0 0 1 38,-38 m -38,597 v -559 m 18,0 a 20,20 0 0 1 20,-20 m -20,579 v -559 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,472 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-361 h 353 m -353,242 h 353 m -353,-361 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,456 a 38,38 0 0 1 -38,38 m 38,-38 v -559 m -38,-20 a 20,20 0 0 1 20,20 m 0,559 a 20,20 0 0 1 -20,20 m 20,-20 v -559 m -813.1851,309.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,206.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-223 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,460 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-341 a 38,38 0 0 1 38,-38 m -38,478 v -440 m 18,0 a 20,20 0 0 1 20,-20 m -20,460 v -440 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,353 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-242 h 353 m -353,123 h 353 m -353,-242 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,337 a 38,38 0 0 1 -38,38 m 38,-38 v -440 m -38,-20 a 20,20 0 0 1 20,20 m 0,440 a 20,20 0 0 1 -20,20 m 20,-20 v -440 m -803.8542,309.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,341 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-222 a 38,38 0 0 1 38,-38 m -38,359 v -321 m 18,0 a 20,20 0 0 1 20,-20 m -20,341 v -321 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,234 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,218 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -38,-20 a 20,20 0 0 1 20,20 m 0,321 a 20,20 0 0 1 -20,20 m 20,-20 v -321 m 1758.8935,666.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,938 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-22 h 321 m -321,4 h 321 m -337,-20 v -99 m 16,115 a 16,16 0 0 1 -16,-16 m 353,0 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -353,-123 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -16,-498 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,357 v -115 m 353,115 v -115 m -375,-222 a 38,38 0 0 1 38,-38 m -38,716 v -678 m 18,0 a 20,20 0 0 1 20,-20 m 0,718 a 20,20 0 0 1 -20,-20 m 0,0 v -678 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 46,595 h 291 m -337,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,575 a 38,38 0 0 1 -38,38 m 38,-38 v -678 m -38,-20 a 20,20 0 0 1 20,20 m 0,678 a 20,20 0 0 1 -20,20 m 20,-20 v -678 m -2731.8461,-222 h 3787.7549"
+
 const NordlysPictogram = () => {
+  const pathRef = useRef<SVGPathElement>(null);
+  const [pathLen, setPathLen] = useState(0);
+
+  useEffect(() => {
+    if (pathRef.current) {
+        // Measure the *exact* length of the path in its own coordinate system
+        const length = pathRef.current.getTotalLength();
+        setPathLen(length);
+    }
+  }, []);
+
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-40 mix-blend-screen">
+    // Changed absolute positioning to relative flex so it doesn't overlap text
+    <div className="relative flex items-center justify-center pointer-events-none z-0 opacity-40 mix-blend-screen w-full mb-8">
       <svg 
-        viewBox="0 0 512 512" 
-        className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] max-w-2xl max-h-2xl"
+        viewBox={SVG_VIEWBOX}
+        className="w-[90vw] h-auto md:w-[60vw] max-w-4xl"
         preserveAspectRatio="xMidYMid meet"
+        style={{ overflow: 'visible' }}
       >
         <defs>
           <linearGradient id="aurora-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -255,49 +273,27 @@ const NordlysPictogram = () => {
           </linearGradient>
         </defs>
         
-        {/* Group with transform from original SVG to flip/scale correctly */}
-        <g transform="translate(0,512) scale(0.1,-0.1)">
+        {/* QCAD uses scale(1, -1) because Y is flipped. We keep it to maintain orientation. */}
+        <g transform="scale(1,-1)">
            <path 
-             d="M1522 4683 c-10 -22 -9 -890 1 -900 4 -4 50 -7 102 -7 l95 0 0 -1798
-             0 -1798 -860 0 -860 0 0 -90 0 -90 2560 0 2560 0 0 90 0 90 -644 0 -645 0 -10
-             53 c-5 28 -22 122 -36 207 -14 85 -35 207 -46 270 -20 111 -65 378 -169 985
-             -27 160 -60 355 -74 435 -30 173 -105 611 -201 1175 -72 421 -75 439 -80 456
-             -5 13 26 15 276 15 154 -1 289 2 300 6 18 7 19 21 19 447 0 242 -3 446 -6 455
-             -6 14 -115 16 -1140 16 -1070 0 -1134 -1 -1142 -17z m1425 -240 c50 -27 96
-             -81 111 -131 6 -20 29 -143 51 -272 22 -129 51 -300 65 -380 29 -165 89 -518
-             140 -820 33 -193 65 -383 121 -705 35 -204 127 -741 195 -1140 39 -229 108
-             -632 125 -730 15 -83 14 -91 -7 -82 -12 4 -67 249 -524 2333 -29 133 -58 251
-             -65 262 -33 53 -25 52 -601 52 -568 0 -563 0 -599 -50 -23 -31 -26 -55 -34
-             -265 -4 -93 -8 -183 -10 -200 -2 -16 -7 -111 -10 -210 -4 -99 -8 -193 -10
-             -210 -2 -16 -7 -106 -10 -200 -4 -93 -8 -185 -10 -204 -2 -19 -6 -119 -10
-             -221 -4 -102 -9 -202 -10 -221 -2 -19 -6 -115 -10 -214 -4 -99 -8 -190 -10
-             -202 -2 -12 -7 -107 -11 -210 -4 -103 -8 -195 -10 -203 -1 -8 -3 -21 -3 -27
-             -1 -7 -8 -13 -16 -13 -13 0 -15 234 -15 2048 0 1432 3 2059 11 2086 13 48 91
-             127 139 143 24 8 179 11 505 10 465 -2 470 -2 512 -24z m157 -1695 c8 -13 121
-             -509 251 -1103 130 -594 256 -1167 279 -1272 l43 -193 -904 0 -904 0 5 53 c3
-             28 8 126 12 217 3 91 7 179 9 197 1 17 6 112 10 210 4 98 8 192 10 210 1 17 6
-             109 9 205 4 95 9 198 11 228 2 30 6 116 10 190 7 162 14 308 20 410 3 41 7
-             147 11 235 3 88 8 168 10 178 2 10 4 63 5 117 2 156 -62 140 564 140 l535 0
-             14 -22z" 
-             fill="url(#aurora-gradient)" 
+             ref={pathRef}
+             id="path75"
+             className={pathLen > 0 ? "animate-draw-aurora" : "opacity-0"}
+             fill="none"
              stroke="url(#aurora-gradient)" 
-             strokeWidth="25"
-             pathLength="1"
-             className="animate-draw-aurora"
-           />
-           <path 
-             d="M2056 4219 c-46 -37 -53 -63 -61 -244 -4 -93 -8 -185 -10 -203 -1
-             -18 -6 -117 -10 -220 -4 -103 -8 -205 -10 -227 -2 -22 -7 -101 -10 -176 -7
-             -150 -1 -174 51 -197 18 -9 169 -12 527 -12 478 0 504 1 534 19 19 12 34 31
-             37 48 9 41 -236 1153 -261 1187 -10 14 -28 29 -41 35 -15 7 -145 11 -371 11
-             -338 0 -349 -1 -375 -21z m881 -664 c37 -165 64 -293 106 -488 8 -39 7 -51 -4
-             -58 -8 -5 -240 -9 -516 -9 l-503 0 -6 25 c-3 14 -4 65 0 113 3 48 9 159 12
-             247 4 88 8 167 10 175 1 8 3 54 3 103 l1 87 427 -2 428 -3 42 -190z"
-             fill="url(#aurora-gradient)" 
-             stroke="url(#aurora-gradient)" 
-             strokeWidth="25"
-             pathLength="1"
-             className="animate-draw-aurora"
+             strokeLinecap="round" 
+             strokeLinejoin="round"
+             
+             // Pass the calculated length to CSS
+             style={{ 
+                 '--path-len': pathLen 
+             } as React.CSSProperties}
+
+             // vectorEffect ensures 1.5px is always 1.5px on screen
+             vectorEffect="non-scaling-stroke"
+             strokeWidth="1.5" 
+             
+             d={SVG_PATH}
            />
         </g>
       </svg>
@@ -380,7 +376,7 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
 // --- Page Sections ---
 
 const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
-  <div className="relative h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center overflow-hidden">
+  <div className="relative min-h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center overflow-hidden py-24">
     
     {/* Aurora Furniture Outline */}
     <NordlysPictogram />
@@ -550,8 +546,8 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
 
             {/* Block 4: Cinematic Material Detail (Scroll Linked) */}
             <CinematicMaterial 
-                image="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=2574"
-                mobileImage="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=1080&h=1920" // Example mobile crop
+                image="public/images/close_up.jpg"
+                mobileImage="public/images/close_up.jpg" // Example mobile crop
                 title="Tangible Texture." 
                 subtitle="The Details" 
             />
@@ -838,10 +834,10 @@ export default function App() {
           animation-delay: 4s;
         }
 
-        /* Draw and Fill Aurora Path Animation */
+        /* Draw and Fill Aurora Path Animation - NOW USING CSS VARIABLES */
         @keyframes draw-and-fill {
           0% { 
-            stroke-dashoffset: 1; 
+            stroke-dashoffset: var(--path-len); 
             fill-opacity: 0; 
           }
           60% { 
@@ -850,14 +846,19 @@ export default function App() {
           }
           100% { 
             stroke-dashoffset: 0; 
-            fill-opacity: 0.3; /* Subtle fill to solidify the shape */
+            /* REMOVED FILL OPACITY: Keeping fill 0 ensures no polygon stacking */
+            fill-opacity: 0; 
           }
         }
+        
         .animate-draw-aurora {
-          stroke-dasharray: 1;
-          stroke-dashoffset: 1;
-          fill: url(#aurora-gradient); /* Ensure fill uses the gradient */
+          /* Using the variable calculated via JS ensure this works on ANY SVG size */
+          stroke-dasharray: var(--path-len);
+          stroke-dashoffset: var(--path-len);
+          
+          fill: none; /* FORCE NO FILL */
           fill-opacity: 0; /* Start transparent */
+          
           animation: draw-and-fill 4s ease-out forwards;
           animation-delay: 0.5s; 
         }
