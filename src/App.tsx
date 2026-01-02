@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
 import { Canvas, useFrame } from '@react-three/fiber';
 // NOTE: Uncomment 'useGLTF' below when you are ready to load your custom 3D model
-import { Environment, Float, ContactShadows, useGLTF } from '@react-three/drei'; 
+import { Environment, ContactShadows, useGLTF } from '@react-three/drei'; 
 import * as THREE from 'three';
 
 // --- Types ---
@@ -138,32 +138,42 @@ const COLLECTION: Product[] = [
 
 // --- 3D Components ---
 
-const PlaceholderModel: React.FC<{ scrollProgress: number }> = ({ scrollProgress }) => {
+const PlaceholderModel: React.FC<{ rotationProgress: number; isMobile: boolean }> = ({ rotationProgress, isMobile }) => {
   const meshRef = useRef<THREE.Group>(null);
   
   // Custom model loaded
   const { scene } = useGLTF('/models/nattbord.glb'); 
   
+  // Range: 90 degrees total (-45 to +45)
+  const START_ROTATION = -Math.PI / 4; // -45 deg
+  const END_ROTATION = Math.PI / 4;    // +45 deg
+  
+  const rotation = useRef({ x: 0, y: START_ROTATION });
+
   useFrame((_, delta) => {
     if (meshRef.current) {
-      // Scroll Interaction: 
-      // Rotate 45 degrees total (from -22.5 to +22.5 degrees) based on scroll progress
-      const targetRotationY = -Math.PI / 8 + (scrollProgress * (Math.PI / 4));
+      // 1. Calculate Targets based on rotationProgress (0 to 1)
+      const targetY = START_ROTATION + (rotationProgress * (END_ROTATION - START_ROTATION));
       
-      // Optional: Slight tilt (15 degrees) on X axis to show top surface as you scroll
-      const targetRotationX = scrollProgress * (Math.PI / 12);
+      // Slight tilt X (0 to 15deg)
+      const targetX = rotationProgress * (Math.PI / 12);
 
-      // Smooth dampening to reach target
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, delta * 4);
-      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, delta * 4);
+      // 2. Smooth Dampening (Linear Interpolation)
+      const smoothness = 6; 
+
+      rotation.current.x = THREE.MathUtils.lerp(rotation.current.x, targetX, delta * smoothness);
+      rotation.current.y = THREE.MathUtils.lerp(rotation.current.y, targetY, delta * smoothness);
+
+      // Apply to mesh
+      meshRef.current.rotation.x = rotation.current.x;
+      meshRef.current.rotation.y = rotation.current.y;
     }
   });
 
   return (
     <group ref={meshRef}>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        <primitive object={scene} scale={2} />
-      </Float>
+      {/* Position: y=1.5 on mobile lifts it up to be visible above the text cards */}
+      <primitive object={scene} scale={2} position={[0, isMobile ? 1.5 : 0, 0]} />
       <ContactShadows opacity={0.4} scale={10} blur={2.5} far={4} />
     </group>
   );
@@ -232,7 +242,7 @@ const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
 // --- The Nattbord Experience (Apple Style Layered Mixed Media) ---
 const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [rotationProgress, setRotationProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -245,9 +255,17 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
-      const { top, height } = containerRef.current.getBoundingClientRect();
-      const progress = Math.min(Math.max(-top / (height - window.innerHeight), 0), 1);
-      setScrollProgress(progress);
+      const { top } = containerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      const scrollPixels = -top;
+      
+      // 1. Rotation Progress
+      // When top <= 0, we are inside the sticky zone.
+      // We want to track the scroll for the first 150vh (Freeze Spacer)
+      const freezeDistance = viewportHeight * 1.5;
+      const rProgress = Math.min(Math.max(scrollPixels / freezeDistance, 0), 1);
+      setRotationProgress(rProgress);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -255,9 +273,9 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
   }, []);
 
   return (
-    <div className="bg-[#110614] text-white w-full">
+    <div className="bg-[#110614] text-white w-full relative">
       {/* 1. Title Screen */}
-      <div className="h-screen w-full flex flex-col items-center justify-center relative px-6 z-10">
+      <div className="h-screen w-full flex flex-col items-center justify-center relative px-6 z-10 bg-[#110614]">
         <FadeIn delay={300}>
           <h1 className="text-6xl md:text-9xl font-bold tracking-tight mb-4 text-center font-ubuntu lowercase">
             {product.name}
@@ -270,28 +288,32 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       </div>
 
       {/* 2. Layered Scrollytelling Section */}
-      <div ref={containerRef} className="relative grid grid-cols-1">
+      {/* This container must act as the track for sticky elements */}
+      <div ref={containerRef} className="relative w-full">
         
-        {/* Layer A: Sticky 3D Model (Pinned to right on desktop, centered/smaller on mobile) */}
-        <div className="col-start-1 row-start-1 h-screen sticky top-0 pointer-events-none z-0">
-           <div className="absolute right-0 w-full md:w-1/2 h-full">
+        {/* STICKY MODEL LAYER */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-0">
+           <div className="absolute inset-0 w-full h-full">
               <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
-                 {/* Only lighting here, background transparent to blend */}
                  <ambientLight intensity={0.5} />
                  <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                  <pointLight position={[-10, -10, -10]} intensity={0.5} />
                  <Environment preset="city" />
-                 <PlaceholderModel scrollProgress={scrollProgress} />
+                 <PlaceholderModel rotationProgress={rotationProgress} isMobile={isMobile} />
               </Canvas>
            </div>
         </div>
 
-        {/* Layer B: Content Blocks (Scrolls over Layer A) */}
-        <div className="col-start-1 row-start-1 z-10 relative">
+        {/* CONTENT LAYER */}
+        {/* Negative margin pulls this whole stack UP so it overlaps the sticky model container */}
+        <div className="relative z-10 -mt-[100vh]">
              
-             {/* Block 1: Text */}
-            <div className="min-h-screen flex items-center px-12 md:px-24">
-                 <div className="w-full md:w-1/2">
+             {/* THE FREEZE SPACER: 150vh of nothingness to allow for rotation */}
+             <div className="h-[150vh] w-full pointer-events-none"></div>
+
+             {/* Block 1: Text (Transparent Background to see model) */}
+            <div className="min-h-screen flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
+                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
                     <p className="text-xl text-gray-300 leading-relaxed font-light">
                         Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
@@ -312,9 +334,9 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                </div>
             </div>
 
-            {/* Block 3: Text */}
-            <div className="min-h-screen flex items-center px-12 md:px-24">
-                 <div className="w-full md:w-1/2">
+            {/* Block 3: Text (Opaque BG to keep model covered) */}
+            <div className="min-h-screen bg-[#110614] flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
+                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">Silent Motion.</h2>
                     <p className="text-xl text-gray-300 leading-relaxed font-light">
                         Precision-engineered soft-close hinges ensure your peace is never disturbed. The drawer glides effortlessly, respecting the silence of your sanctuary.
@@ -331,9 +353,9 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                />
             </div>
 
-            {/* Block 5: Text */}
-             <div className="min-h-screen flex items-center px-12 md:px-24">
-                 <div className="w-full md:w-1/2">
+            {/* Block 5: Text (Opaque BG to keep model covered) */}
+             <div className="min-h-screen bg-[#110614] flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
+                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">Integrated Power.</h2>
                     <p className="text-xl text-gray-300 leading-relaxed font-light">
                         Hidden cable management and optional wireless charging integration keep your devices ready for the morning without cluttering your night.
@@ -538,7 +560,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#110614] min-h-screen w-full font-sans selection:bg-white selection:text-black overflow-x-hidden">
+    <div className="bg-[#110614] min-h-screen w-full font-sans selection:bg-white selection:text-black">
       {/* Inline Styles & Font Import */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
@@ -548,16 +570,21 @@ export default function App() {
             font-family: 'Ubuntu', sans-serif;
         }
 
+        /* Prevent overflow on the body to allow sticky positioning to work correctly */
+        body {
+            overflow-x: hidden;
+        }
+
         /* Responsive Large Menu Text - BYPASSING TAILWIND */
         .menu-text-responsive {
-            font-size: 6vh;
+            font-size: 5.4vh; /* Reduced by ~10% */
             line-height: 1.1;
             font-weight: 700;
             letter-spacing: -0.05em;
         }
         @media (min-width: 768px) {
             .menu-text-responsive {
-                font-size: 9vh; /* Massive desktop size */
+                font-size: 8vh; /* Reduced by ~10% */
             }
         }
 
