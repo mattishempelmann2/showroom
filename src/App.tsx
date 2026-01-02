@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronRight, Menu, X, ShoppingBag } from 'lucide-react';
 import { Canvas, useFrame } from '@react-three/fiber';
 // NOTE: Uncomment 'useGLTF' below when you are ready to load your custom 3D model
 import { Environment, ContactShadows, useGLTF } from '@react-three/drei'; 
@@ -14,8 +14,11 @@ interface Product {
   description: string;
   price: string | null;
   heroImage: string;
+  heroImageMobile?: string; // New: Dedicated mobile hero
   detailImage1: string;
+  detailImage1Mobile?: string; // New: Dedicated mobile detail
   detailImage2: string;
+  detailImage2Mobile?: string; // New: Dedicated mobile detail
   features: string[];
   shopifyLink: string;
 }
@@ -38,8 +41,11 @@ const COLLECTION: Product[] = [
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
     price: 'From €850',
     heroImage: '/images/nattbord_natur.jpg',
+    heroImageMobile: '/images/nattbord_natur.jpg', // Example of mobile specific image
     detailImage1: '/images/nattbord_produksjon.jpg',
+    detailImage1Mobile: '/images/prod_mobile.jpg',
     detailImage2: '/images/vintereik.jpg',
+    detailImage2Mobile: '/images/vintereik.jpg',
     features: ['Smoked Oak', 'Soft-Close', 'Integrated Charging'],
     shopifyLink: 'https://nordlys-moebler-2.myshopify.com/en/products/skrivebord'
   },
@@ -181,8 +187,25 @@ const PlaceholderModel: React.FC<{ rotationProgress: number; isMobile: boolean }
 
 // --- Standard UI Components ---
 
+// Responsive Image Component (Helper)
+const ResponsiveImage: React.FC<{
+  desktopSrc: string;
+  mobileSrc?: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+}> = ({ desktopSrc, mobileSrc, alt, className, style }) => {
+  return (
+    <picture className="w-full h-full block">
+       {/* If mobileSrc is provided, use it on screens smaller than 768px */}
+       {mobileSrc && <source media="(max-width: 768px)" srcSet={mobileSrc} />}
+       <img src={desktopSrc} alt={alt} className={className} style={style} />
+    </picture>
+  );
+};
+
 const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, className = '' }) => {
-  const baseClass = "inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-full tracking-wide cursor-pointer whitespace-nowrap";
+  const baseClass = "inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-[12px] tracking-wide cursor-pointer whitespace-nowrap";
   const primaryClass = "bg-white text-black hover:bg-gray-200 border border-transparent";
   const secondaryClass = "bg-transparent text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm";
   
@@ -209,6 +232,78 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
   return (
     <div className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       {children}
+    </div>
+  );
+};
+
+// --- Cinematic Panning Component (Scroll Linked) ---
+const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: string; subtitle: string }> = ({ image, mobileImage, title, subtitle }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const handleScroll = () => {
+      animationFrameId = requestAnimationFrame(() => {
+        if (!containerRef.current || !imageRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Optimize: Don't calculate if off screen
+        if (rect.bottom < 0 || rect.top > viewportHeight) return;
+
+        const distance = viewportHeight + rect.height;
+        // 0 = just entered bottom, 1 = just left top
+        const progress = (viewportHeight - rect.top) / distance;
+        
+        // Calculate Translation
+        // We pan diagonally: X (-5% to +5%), Y (-3% to +3%)
+        // Scale constant at 1.3 to ensure edges are covered
+        const panRangeX = 10; 
+        const panRangeY = 6;
+        
+        const x = (progress - 0.5) * panRangeX; 
+        const y = (progress - 0.5) * panRangeY; 
+
+        imageRef.current.style.transform = `scale(1.3) translate3d(${x}%, ${y}%, 0)`;
+      });
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial calc
+    
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+        cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-[80vh] overflow-hidden relative bg-[#110614] border-t border-b border-white/5">
+      {/* Scroll-Linked Image Layer */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* We use the picture tag logic here manually to preserve the Ref on the IMG */}
+        <picture className="w-full h-full block">
+            {mobileImage && <source media="(max-width: 768px)" srcSet={mobileImage} />}
+            <img 
+              ref={imageRef}
+              src={image} 
+              alt="Material Detail" 
+              className="w-full h-full object-cover opacity-80 will-change-transform"
+              style={{ transform: 'scale(1.3)' }} // Default state
+            />
+        </picture>
+      </div>
+      
+      {/* Overlay Content */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#110614] via-transparent to-transparent pointer-events-none"></div>
+      <div className="absolute bottom-12 left-6 md:left-24 z-10 max-w-lg">
+         <div className="backdrop-blur-md bg-black/30 p-8 rounded-2xl border border-white/10">
+            <p className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-3">{subtitle}</p>
+            <h3 className="text-3xl md:text-4xl font-ubuntu text-white font-light">{title}</h3>
+         </div>
+      </div>
     </div>
   );
 };
@@ -244,6 +339,7 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotationProgress, setRotationProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [modelOpacity, setModelOpacity] = useState(1);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -266,6 +362,23 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       const freezeDistance = viewportHeight * 1.5;
       const rProgress = Math.min(Math.max(scrollPixels / freezeDistance, 0), 1);
       setRotationProgress(rProgress);
+
+      // 2. Opacity Logic (Mobile Only)
+      // Fade out the model as the "Smoked Oak" text block scrolls over it
+      if (window.innerWidth < 768) {
+        // Start fade roughly when text block starts moving up over the model (1.5vh)
+        // End fade well before the next solid image block arrives (2.05vh) for aggressive fade
+        const fadeStart = viewportHeight * 1.5;
+        const fadeEnd = viewportHeight * 2.05;
+        
+        let newOpacity = 1;
+        if (scrollPixels > fadeStart) {
+            newOpacity = 1 - ((scrollPixels - fadeStart) / (fadeEnd - fadeStart));
+        }
+        setModelOpacity(Math.min(Math.max(newOpacity, 0), 1));
+      } else {
+        setModelOpacity(1);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -292,7 +405,10 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       <div ref={containerRef} className="relative w-full">
         
         {/* STICKY MODEL LAYER */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-0">
+        <div 
+            className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-0 transition-opacity duration-100 ease-linear"
+            style={{ opacity: modelOpacity }}
+        >
            <div className="absolute inset-0 w-full h-full">
               <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
                  <ambientLight intensity={0.5} />
@@ -315,16 +431,28 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
             <div className="min-h-screen flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
                  <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
-                    <p className="text-xl text-gray-300 leading-relaxed font-light">
+                    <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
                         Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
                     </p>
+                    {/* Added "Tilpass din" Button */}
+                    <div className="md:hidden w-full">
+                        <Button primary href={product.shopifyLink} className="w-full">
+                            Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </div>
+                    <div className="hidden md:block">
+                        <Button primary href={product.shopifyLink}>
+                            Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </div>
                  </div>
             </div>
 
             {/* Block 2: Full Width Image (Opaque, covers model) */}
             <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
-               <img 
-                 src={product.heroImage} 
+               <ResponsiveImage 
+                 desktopSrc={product.heroImage} 
+                 mobileSrc={product.heroImageMobile}
                  alt="Hero" 
                  className="w-full h-full object-cover opacity-90"
                />
@@ -344,14 +472,13 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                  </div>
             </div>
 
-            {/* Block 4: Full Width Image */}
-            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
-               <img 
-                 src={product.detailImage1} 
-                 alt="Detail" 
-                 className="w-full h-full object-cover"
-               />
-            </div>
+            {/* Block 4: Cinematic Material Detail (Scroll Linked) */}
+            <CinematicMaterial 
+                image="/images/nm34L_close_up.jpg"
+                mobileImage="/images/nm34L_close_up.jpg" // Example mobile crop
+                title="Tangible Texture." 
+                subtitle="The Details" 
+            />
 
             {/* Block 5: Text (Opaque BG to keep model covered) */}
              <div className="min-h-screen bg-[#110614] flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
@@ -363,14 +490,25 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                  </div>
             </div>
 
+            {/* Block 5.5: Restored Detail Image 1 */}
+            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
+               <ResponsiveImage 
+                 desktopSrc={product.detailImage1} 
+                 mobileSrc={product.detailImage1Mobile}
+                 alt="Detail View" 
+                 className="w-full h-full object-cover"
+               />
+            </div>
+
             {/* Block 6: Detail Image + Quote */}
             <div className="w-full min-h-screen bg-[#110614] flex flex-col justify-center">
                 <div className="px-6 md:px-12 mb-12 text-center max-w-4xl mx-auto">
                     <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
                 </div>
                <div className="w-full h-[70vh] relative overflow-hidden">
-                  <img 
-                    src={product.detailImage2} 
+                  <ResponsiveImage 
+                    desktopSrc={product.detailImage2} 
+                    mobileSrc={product.detailImage2Mobile}
                     alt="Lifestyle" 
                     className="w-full h-full object-cover"
                   />
@@ -408,7 +546,7 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       </div>
     </div>
   );
-}
+};
 
 const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => {
   // Reset scroll when product changes
@@ -437,8 +575,9 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
       {/* 2. Hero Image & Key Details */}
       <div className="min-h-screen w-full relative flex flex-col md:flex-row">
          <div className="w-full md:w-1/2 h-[50vh] md:h-auto relative">
-            <img 
-                src={product.heroImage} 
+            <ResponsiveImage 
+                desktopSrc={product.heroImage} 
+                mobileSrc={product.heroImageMobile}
                 alt={product.name} 
                 className="w-full h-full object-cover"
             />
@@ -489,8 +628,9 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
           </FadeIn>
         </div>
         <div className="h-[60vh] md:h-auto overflow-hidden">
-          <img 
-            src={product.detailImage1} 
+          <ResponsiveImage 
+            desktopSrc={product.detailImage1} 
+            mobileSrc={product.detailImage1Mobile}
             alt="Detail" 
             className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
           />
@@ -499,8 +639,9 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
 
       {/* 4. Full Width Visual */}
       <div className="relative h-[80vh] w-full overflow-hidden">
-         <img 
-            src={product.detailImage2} 
+         <ResponsiveImage 
+            desktopSrc={product.detailImage2} 
+            mobileSrc={product.detailImage2Mobile}
             alt="Lifestyle" 
             className="h-full w-full object-cover fixed-attachment"
           />
@@ -650,6 +791,15 @@ export default function App() {
           background-color: transparent !important;
           border-color: transparent !important;
         }
+
+        /* Added nav a reset here as requested */
+        nav a {
+            color: white !important;
+            text-decoration: none !important;
+        }
+        nav a:hover {
+            color: #d1d5db !important; /* gray-300 */
+        }
       `}</style>
       
       {/* Navigation Bar - Always Visible */}
@@ -677,8 +827,18 @@ export default function App() {
             nordlys møbler
           </button>
 
-          {/* Empty spacer to balance flex if needed, or Cart icon later */}
-          <div className="w-8"></div>
+          {/* Shop Icon (Right) - Fades in on scroll */}
+          <div className="flex items-center justify-end z-50">
+             <a 
+                href={activeProduct?.shopifyLink || "#"}
+                className={`text-white p-2 hover:text-gray-300 transition-all duration-500 ease-out transform ${
+                    scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+                }`}
+                aria-label="Shop"
+             >
+                <ShoppingBag size={28} />
+             </a>
+          </div>
         </div>
       </nav>
 
