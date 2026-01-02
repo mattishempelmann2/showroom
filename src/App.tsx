@@ -236,6 +236,75 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
   );
 };
 
+// --- New Component: Nordlys Pictogram Animation ---
+const NordlysPictogram = () => {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-40 mix-blend-screen">
+      <svg 
+        viewBox="0 0 512 512" 
+        className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] max-w-2xl max-h-2xl"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <linearGradient id="aurora-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#4ade80" stopOpacity="0.2" /> {/* Light Green */}
+            <stop offset="25%" stopColor="#4ade80" stopOpacity="1" />   {/* Green */}
+            <stop offset="50%" stopColor="#2dd4bf" stopOpacity="1" />   {/* Teal */}
+            <stop offset="75%" stopColor="#818cf8" stopOpacity="1" />   {/* Indigo */}
+            <stop offset="100%" stopColor="#818cf8" stopOpacity="0.2" /> 
+          </linearGradient>
+        </defs>
+        
+        {/* Group with transform from original SVG to flip/scale correctly */}
+        <g transform="translate(0,512) scale(0.1,-0.1)">
+           <path 
+             d="M1522 4683 c-10 -22 -9 -890 1 -900 4 -4 50 -7 102 -7 l95 0 0 -1798
+             0 -1798 -860 0 -860 0 0 -90 0 -90 2560 0 2560 0 0 90 0 90 -644 0 -645 0 -10
+             53 c-5 28 -22 122 -36 207 -14 85 -35 207 -46 270 -20 111 -65 378 -169 985
+             -27 160 -60 355 -74 435 -30 173 -105 611 -201 1175 -72 421 -75 439 -80 456
+             -5 13 26 15 276 15 154 -1 289 2 300 6 18 7 19 21 19 447 0 242 -3 446 -6 455
+             -6 14 -115 16 -1140 16 -1070 0 -1134 -1 -1142 -17z m1425 -240 c50 -27 96
+             -81 111 -131 6 -20 29 -143 51 -272 22 -129 51 -300 65 -380 29 -165 89 -518
+             140 -820 33 -193 65 -383 121 -705 35 -204 127 -741 195 -1140 39 -229 108
+             -632 125 -730 15 -83 14 -91 -7 -82 -12 4 -67 249 -524 2333 -29 133 -58 251
+             -65 262 -33 53 -25 52 -601 52 -568 0 -563 0 -599 -50 -23 -31 -26 -55 -34
+             -265 -4 -93 -8 -183 -10 -200 -2 -16 -7 -111 -10 -210 -4 -99 -8 -193 -10
+             -210 -2 -16 -7 -106 -10 -200 -4 -93 -8 -185 -10 -204 -2 -19 -6 -119 -10
+             -221 -4 -102 -9 -202 -10 -221 -2 -19 -6 -115 -10 -214 -4 -99 -8 -190 -10
+             -202 -2 -12 -7 -107 -11 -210 -4 -103 -8 -195 -10 -203 -1 -8 -3 -21 -3 -27
+             -1 -7 -8 -13 -16 -13 -13 0 -15 234 -15 2048 0 1432 3 2059 11 2086 13 48 91
+             127 139 143 24 8 179 11 505 10 465 -2 470 -2 512 -24z m157 -1695 c8 -13 121
+             -509 251 -1103 130 -594 256 -1167 279 -1272 l43 -193 -904 0 -904 0 5 53 c3
+             28 8 126 12 217 3 91 7 179 9 197 1 17 6 112 10 210 4 98 8 192 10 210 1 17 6
+             109 9 205 4 95 9 198 11 228 2 30 6 116 10 190 7 162 14 308 20 410 3 41 7
+             147 11 235 3 88 8 168 10 178 2 10 4 63 5 117 2 156 -62 140 564 140 l535 0
+             14 -22z" 
+             fill="url(#aurora-gradient)" 
+             stroke="url(#aurora-gradient)" 
+             strokeWidth="25"
+             pathLength="1"
+             className="animate-draw-aurora"
+           />
+           <path 
+             d="M2056 4219 c-46 -37 -53 -63 -61 -244 -4 -93 -8 -185 -10 -203 -1
+             -18 -6 -117 -10 -220 -4 -103 -8 -205 -10 -227 -2 -22 -7 -101 -10 -176 -7
+             -150 -1 -174 51 -197 18 -9 169 -12 527 -12 478 0 504 1 534 19 19 12 34 31
+             37 48 9 41 -236 1153 -261 1187 -10 14 -28 29 -41 35 -15 7 -145 11 -371 11
+             -338 0 -349 -1 -375 -21z m881 -664 c37 -165 64 -293 106 -488 8 -39 7 -51 -4
+             -58 -8 -5 -240 -9 -516 -9 l-503 0 -6 25 c-3 14 -4 65 0 113 3 48 9 159 12
+             247 4 88 8 167 10 175 1 8 3 54 3 103 l1 87 427 -2 428 -3 42 -190z"
+             fill="url(#aurora-gradient)" 
+             stroke="url(#aurora-gradient)" 
+             strokeWidth="25"
+             pathLength="1"
+             className="animate-draw-aurora"
+           />
+        </g>
+      </svg>
+    </div>
+  );
+};
+
 // --- Cinematic Panning Component (Scroll Linked) ---
 const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: string; subtitle: string }> = ({ image, mobileImage, title, subtitle }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -311,24 +380,31 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
 // --- Page Sections ---
 
 const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
-  <div className="relative h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center">
-    <FadeIn delay={200}>
-      <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">Nordlys Collection</p>
-    </FadeIn>
-    <FadeIn delay={400}>
-      <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white font-ubuntu lowercase">
-        nordlys møbler
-      </h1>
-    </FadeIn>
-    <FadeIn delay={600}>
-        <div className="mt-12">
-          <Button primary onClick={onExplore}>
-            Explore Collection
-          </Button>
-        </div>
-    </FadeIn>
+  <div className="relative h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center overflow-hidden">
+    
+    {/* Aurora Furniture Outline */}
+    <NordlysPictogram />
 
-    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
+    {/* Content */}
+    <div className="z-10 flex flex-col items-center justify-center relative">
+        <FadeIn delay={200}>
+        <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">Nordlys Collection</p>
+        </FadeIn>
+        <FadeIn delay={400}>
+        <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white font-ubuntu lowercase">
+            nordlys møbler
+        </h1>
+        </FadeIn>
+        <FadeIn delay={600}>
+            <div className="mt-12">
+            <Button primary onClick={onExplore}>
+                Explore Collection
+            </Button>
+            </div>
+        </FadeIn>
+    </div>
+
+    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30 z-10">
       <ChevronDown size={32} />
     </div>
   </div>
@@ -474,8 +550,8 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
 
             {/* Block 4: Cinematic Material Detail (Scroll Linked) */}
             <CinematicMaterial 
-                image="/images/nm34L_close_up.jpg"
-                mobileImage="/images/nm34L_close_up.jpg" // Example mobile crop
+                image="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=2574"
+                mobileImage="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=1080&h=1920" // Example mobile crop
                 title="Tangible Texture." 
                 subtitle="The Details" 
             />
@@ -727,6 +803,63 @@ export default function App() {
             .menu-text-responsive {
                 font-size: 8vh; /* Reduced by ~10% */
             }
+        }
+
+        /* Cinematic Slow Pan Animation */
+        @keyframes slow-pan {
+            0% {
+                transform: scale(1.25) translate(0%, 0%);
+            }
+            50% {
+                transform: scale(1.35) translate(-2%, -2%);
+            }
+            100% {
+                transform: scale(1.25) translate(0%, 0%);
+            }
+        }
+        .animate-slow-pan {
+            animation: slow-pan 30s ease-in-out infinite alternate;
+        }
+
+        /* Aurora Animation */
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+
+        /* Draw and Fill Aurora Path Animation */
+        @keyframes draw-and-fill {
+          0% { 
+            stroke-dashoffset: 1; 
+            fill-opacity: 0; 
+          }
+          60% { 
+            stroke-dashoffset: 0; 
+            fill-opacity: 0; 
+          }
+          100% { 
+            stroke-dashoffset: 0; 
+            fill-opacity: 0.3; /* Subtle fill to solidify the shape */
+          }
+        }
+        .animate-draw-aurora {
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          fill: url(#aurora-gradient); /* Ensure fill uses the gradient */
+          fill-opacity: 0; /* Start transparent */
+          animation: draw-and-fill 4s ease-out forwards;
+          animation-delay: 0.5s; 
         }
 
         /* Reset Vite Default Layout Constraints */
