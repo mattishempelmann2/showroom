@@ -561,18 +561,24 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
         </div>
       </div>
 
-      {/* MOVED: Detail Image + Quote (Previously at the end) */}
-      <div className="w-full min-h-screen bg-[#110614] flex flex-col justify-center relative z-20">
-          <div className="px-6 md:px-12 mb-12 text-center max-w-4xl mx-auto">
-              <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
+      {/* Intro Section: Split Screen (Image Left | Text Right) */}
+      <div className="relative min-h-screen w-full flex flex-col md:flex-row z-20">
+          {/* Image Layer - Left on Desktop */}
+          <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0">
+             <ResponsiveImage 
+                desktopSrc={product.detailImage2} 
+                mobileSrc={product.detailImage2Mobile}
+                alt="Lifestyle" 
+                className="h-full w-full object-cover"
+             />
+             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
           </div>
-          <div className="w-full h-[70vh] relative overflow-hidden">
-            <ResponsiveImage 
-              desktopSrc={product.detailImage2} 
-              mobileSrc={product.detailImage2Mobile}
-              alt="Lifestyle" 
-              className="w-full h-full object-cover"
-            />
+          
+          {/* Text Layer - Right on Desktop */}
+          <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+             <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                 <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
+             </div>
           </div>
       </div>
 
@@ -603,49 +609,57 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
              {/* THE FREEZE SPACER: 150vh of nothingness to allow for rotation */}
              <div className="h-[150vh] w-full pointer-events-none"></div>
 
-             {/* Block 1: Text (Transparent Background to see model) */}
-            <div className="min-h-screen flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
-                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
-                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
-                    <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
-                        Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
-                    </p>
-                    {/* Added "Tilpass din" Button */}
-                    <div className="md:hidden w-full">
-                        <Button primary href={product.shopifyLink} className="w-full">
-                            Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </div>
-                    <div className="hidden md:block">
-                        <Button primary href={product.shopifyLink}>
-                            Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </div>
+             {/* Block 1: Smoked Oak (Text Left | Model Right) */}
+             {/* Desktop: Solid Text on Left, Model visible on Right. Mobile: Text over Model (Glass) */}
+            <div className="min-h-screen w-full flex flex-col md:flex-row">
+                 {/* FIX: Removed md:bg-[#110614] to make it transparent on desktop as requested */}
+                 <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 min-h-screen md:min-h-auto bg-transparent md:bg-transparent">
+                     <div className="w-full bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                        <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
+                        <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
+                            Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
+                        </p>
+                        {/* Added "Tilpass din" Button */}
+                        <div className="md:hidden w-full">
+                            <Button primary href={product.shopifyLink} className="w-full">
+                                Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                            </Button>
+                        </div>
+                        <div className="hidden md:block">
+                            <Button primary href={product.shopifyLink}>
+                                Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                            </Button>
+                        </div>
+                     </div>
                  </div>
+                 {/* Right side transparent for model visibility on Desktop */}
+                 <div className="hidden md:block md:w-1/2 pointer-events-none"></div>
             </div>
 
-            {/* Block 2: Full Width Image (Opaque, covers model) */}
-            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
-               <ResponsiveImage 
-                 desktopSrc={product.heroImage} 
-                 mobileSrc={product.heroImageMobile}
-                 alt="Hero" 
-                 className="w-full h-full object-cover opacity-90"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-[#110614] via-transparent to-[#110614]/50"></div>
-               <div className="absolute bottom-20 left-12 md:left-24 max-w-lg">
-                  <h3 className="text-3xl font-light italic font-ubuntu">"A silhouette that defines the room."</h3>
+            {/* Block 2+3: Silent Motion (Image Left | Text Right) */}
+            {/* Split Screen combining Hero Image and Text */}
+            <div className="relative min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
+               {/* Image Layer - Left on Desktop */}
+               <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-1">
+                  <ResponsiveImage 
+                    desktopSrc={product.heroImage} 
+                    mobileSrc={product.heroImageMobile}
+                    alt="Hero" 
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 md:hidden"></div>
                </div>
-            </div>
 
-            {/* Block 3: Text (Opaque BG to keep model covered) */}
-            <div className="min-h-screen bg-[#110614] flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
-                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
-                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Silent Motion.</h2>
-                    <p className="text-xl text-gray-300 leading-relaxed font-light">
-                        Precision-engineered soft-close hinges ensure your peace is never disturbed. The drawer glides effortlessly, respecting the silence of your sanctuary.
-                    </p>
-                 </div>
+               {/* Text Layer - Right on Desktop */}
+               <div className="relative z-10 w-full md:w-1/2 md:order-2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+                    <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                        <h2 className="text-4xl font-bold mb-6 font-ubuntu">Silent Motion.</h2>
+                        <p className="text-xl text-gray-300 leading-relaxed font-light mb-6">
+                            Precision-engineered soft-close hinges ensure your peace is never disturbed. The drawer glides effortlessly, respecting the silence of your sanctuary.
+                        </p>
+                        <p className="text-lg italic text-white/60">"A silhouette that defines the room."</p>
+                     </div>
+               </div>
             </div>
 
             {/* Block 4: Cinematic Material Detail (Scroll Linked) */}
@@ -656,27 +670,29 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                 subtitle="Detaljer" 
             />
 
-            {/* Block 5: Text (Opaque BG to keep model covered) */}
-             <div className="min-h-screen bg-[#110614] flex flex-col justify-end md:justify-center px-6 md:px-24 pb-24 md:pb-0">
-                 <div className="w-full md:w-1/2 bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
-                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Integrated Power.</h2>
-                    <p className="text-xl text-gray-300 leading-relaxed font-light">
-                        Hidden cable management and optional wireless charging integration keep your devices ready for the morning without cluttering your night.
-                    </p>
+            {/* Block 5+5.5: Integrated Power (Text Left | Image Right) */}
+             <div className="relative min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
+                 {/* Image Layer - Right on Desktop */}
+                 <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-2">
+                    <ResponsiveImage 
+                      desktopSrc={product.detailImage1} 
+                      mobileSrc={product.detailImage1Mobile}
+                      alt="Detail View" 
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20 md:hidden"></div>
+                 </div>
+
+                 {/* Text Layer - Left on Desktop */}
+                 <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+                     <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                        <h2 className="text-4xl font-bold mb-6 font-ubuntu">Integrated Power.</h2>
+                        <p className="text-xl text-gray-300 leading-relaxed font-light">
+                            Hidden cable management and optional wireless charging integration keep your devices ready for the morning without cluttering your night.
+                        </p>
+                     </div>
                  </div>
             </div>
-
-            {/* Block 5.5: Restored Detail Image 1 */}
-            <div className="w-full h-screen bg-[#110614] flex items-center justify-center relative overflow-hidden">
-               <ResponsiveImage 
-                 desktopSrc={product.detailImage1} 
-                 mobileSrc={product.detailImage1Mobile}
-                 alt="Detail View" 
-                 className="w-full h-full object-cover"
-               />
-            </div>
-
-            {/* Previously Block 6 (Detail Image + Quote) was here - Removed */}
 
         </div>
       </div>
