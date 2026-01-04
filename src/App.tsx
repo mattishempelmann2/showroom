@@ -681,33 +681,48 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       {/* This container must act as the track for sticky elements */}
       <div ref={containerRef} className="relative w-full">
         
-        {/* STICKY MODEL LAYER */}
+        {/* STICKY MODEL LAYER (UPDATED FOR SPLIT SCREEN) */}
         <div 
-            className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-0 transition-opacity duration-100 ease-linear"
+            className="sticky top-0 h-screen w-full overflow-hidden z-0 transition-opacity duration-100 ease-linear flex flex-col md:flex-row"
             style={{ opacity: modelOpacity }}
         >
-           <div className="absolute inset-0 w-full h-full">
-              <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
-                 <ambientLight intensity={0.5} />
-                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-                 <pointLight position={[-10, -10, -10]} intensity={0.5} />
-                 <Environment preset="city" />
-                 <PlaceholderModel rotationProgress={rotationProgress} isMobile={isMobile} />
-              </Canvas>
-           </div>
-           
-           {/* SCROLL HINT (Option 1: Pulse Chevron) */}
-           <div 
-             className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-700 ${showScrollHint ? 'opacity-100' : 'opacity-0'}`}
-           >
-              <div className="flex flex-col items-center animate-bounce">
-                <ChevronDown className="text-white/50" size={32} />
-              </div>
+           {/* DESKTOP: Left Side Text (New) */}
+           <div className="hidden md:flex w-1/2 h-full items-center justify-center p-24 bg-[#110614]">
+               <div className="max-w-xl">
+                    <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
+                    <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
+                        Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
+                    </p>
+                    <Button primary href={product.shopifyLink}>
+                        Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+               </div>
            </div>
 
+           {/* RIGHT SIDE: Canvas (Mobile: Full Width, Desktop: 1/2 Width) */}
+           <div className="w-full md:w-1/2 h-full relative">
+               <div className="absolute inset-0 w-full h-full">
+                  <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
+                     <ambientLight intensity={0.5} />
+                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+                     <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                     <Environment preset="city" />
+                     <PlaceholderModel rotationProgress={rotationProgress} isMobile={isMobile} />
+                  </Canvas>
+               </div>
+               
+               {/* SCROLL HINT (Option 1: Pulse Chevron) */}
+               <div 
+                 className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-700 ${showScrollHint ? 'opacity-100' : 'opacity-0'}`}
+               >
+                  <div className="flex flex-col items-center animate-bounce">
+                    <ChevronDown className="text-white/50" size={32} />
+                  </div>
+               </div>
+           </div>
         </div>
 
-        {/* CONTENT LAYER */}
+        {/* CONTENT LAYER (UPDATED) */}
         {/* Negative margin pulls this whole stack UP so it overlaps the sticky model container */}
         <div className="relative z-10 -mt-[100vh]">
              
@@ -715,32 +730,34 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
              <div className="h-[150vh] w-full pointer-events-none"></div>
 
              {/* Block 1: Smoked Oak (Text Left | Model Right) */}
-             {/* Desktop: Solid Text on Left, Model visible on Right. Mobile: Text over Model (Glass) */}
-            <div className="min-h-screen w-full flex flex-col md:flex-row">
-                 {/* FIX: Removed md:bg-[#110614] to make it transparent on desktop as requested */}
-                 <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 min-h-screen md:min-h-auto bg-transparent md:bg-transparent">
-                     <div className="w-full bg-black/40 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+             <div className="min-h-screen w-full flex flex-col md:flex-row">
+                 {/* MOBILE ONLY: Text Overlay */}
+                 <div className="relative z-10 w-full md:hidden flex flex-col justify-end p-6 pb-24 min-h-screen bg-transparent">
+                     <div className="w-full bg-black/40 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
                             Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
                         </p>
-                        {/* Added "Tilpass din" Button */}
-                        <div className="md:hidden w-full">
+                        <div className="w-full">
                             <Button primary href={product.shopifyLink} className="w-full">
-                                Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
-                        </div>
-                        <div className="hidden md:block">
-                            <Button primary href={product.shopifyLink}>
                                 Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                         </div>
                      </div>
                  </div>
-                 {/* Right side transparent for model visibility on Desktop */}
-                 <div className="hidden md:block md:w-1/2 pointer-events-none"></div>
-            </div>
 
+                 {/* DESKTOP ONLY: Spacer to maintain scroll height while text is sticky */}
+                 <div className="hidden md:block w-full min-h-screen pointer-events-none"></div>
+            </div>
+            {/* ADDED BUFFER FOR MOBILE ONLY: Keeps the sticky model visible while the 'Smoked Oak' section scrolls up */}
+            <div className="md:hidden h-[100vh] w-full pointer-events-none"></div>
+            {/* The sticky container ends here, allowing the content above to slide up and off the screen */}
+        </div>
+      </div>
+
+      {/* 3. Subsequent Content (Slides UP following the model section) */}
+      {/* We apply -mt-[100vh] on mobile to pull this section up over the empty buffer we created, keeping the flow seamless */}
+      <div className="relative z-20 bg-[#110614] -mt-[100vh] md:mt-0">
             {/* Block 2+3: Silent Motion (Image Left | Text Right) */}
             {/* Split Screen combining Hero Image and Text */}
             <div className="relative min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
@@ -798,8 +815,6 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                      </div>
                  </div>
             </div>
-
-        </div>
       </div>
 
       {/* 4. Specs / Detail Grid */}
