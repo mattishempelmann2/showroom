@@ -236,67 +236,93 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
   );
 };
 
-// --- New Component: Nordlys Pictogram Animation (FIXED: JS CALCULATION) ---
+// --- New Component: Nordlys Pictogram Animation (UPDATED: BEAM SWEEP REVEAL - FIX FOR DESKTOP - COLORED END STATE) ---
 
-// 1. Paste your QCAD Export Data Here
 const SVG_VIEWBOX = "-1663.1228 -1093.5197 3787.7549 1176"; 
 const SVG_PATH = "m 1532.8451,925.0197 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -353,115 h 353 m -353,-119 h 353 m -353,4 h 353 m -353,-119 h 353 m -161.5,325.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-342 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,1176 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-22 h 321 m -321,4 h 321 m -337,-20 v -99 m 16,115 a 16,16 0 0 1 -16,-16 m 353,0 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -353,-361 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -16,-498 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,357 v -115 m 353,115 v -115 m -375,-222 a 38,38 0 0 1 38,-38 m -38,954 v -916 m 18,0 a 20,20 0 0 1 20,-20 m 0,956 a 20,20 0 0 1 -20,-20 m 0,0 v -916 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 46,833 h 291 m -337,-361 h 353 m -353,242 h 353 m -353,-361 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,813 a 38,38 0 0 1 -38,38 m 38,-38 v -916 m -38,-20 a 20,20 0 0 1 20,20 m 0,916 a 20,20 0 0 1 -20,20 m 20,-20 v -916 m -1463.476,428.5 v -15 m 30,15 v -15 m -30,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,-31.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,325.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-342 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,579 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-460 a 38,38 0 0 1 38,-38 m -38,597 v -559 m 18,0 a 20,20 0 0 1 20,-20 m -20,579 v -559 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,472 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-361 h 353 m -353,242 h 353 m -353,-361 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,456 a 38,38 0 0 1 -38,38 m 38,-38 v -559 m -38,-20 a 20,20 0 0 1 20,20 m 0,559 a 20,20 0 0 1 -20,20 m 20,-20 v -559 m -813.1851,309.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,42.5 v -115 m 0,115 h 353 m -353,-115 h 353 m 0,115 v -115 m -161.5,206.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-223 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,460 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-341 a 38,38 0 0 1 38,-38 m -38,478 v -440 m 18,0 a 20,20 0 0 1 20,-20 m -20,460 v -440 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,353 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-242 h 353 m -353,123 h 353 m -353,-242 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,337 a 38,38 0 0 1 -38,38 m 38,-38 v -440 m -38,-20 a 20,20 0 0 1 20,20 m 0,440 a 20,20 0 0 1 -20,20 m 20,-20 v -440 m -803.8542,309.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,341 v -99 m 353,99 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -375,-222 a 38,38 0 0 1 38,-38 m -38,359 v -321 m 18,0 a 20,20 0 0 1 20,-20 m -20,341 v -321 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 16,234 a 16,16 0 0 1 -16,-16 m 16,16 h 321 m -321,22 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m -337,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,218 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -38,-20 a 20,20 0 0 1 20,20 m 0,321 a 20,20 0 0 1 -20,20 m 20,-20 v -321 m 1758.8935,666.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,938 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-22 h 321 m -321,4 h 321 m -337,-20 v -99 m 16,115 a 16,16 0 0 1 -16,-16 m 353,0 a 16,16 0 0 1 -16,16 m 16,-16 v -99 m -353,-123 v -115 m 0,234 v -115 m 353,-4 v -115 m 0,234 v -115 m -16,-498 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -337,357 v -115 m 353,115 v -115 m -375,-222 a 38,38 0 0 1 38,-38 m -38,716 v -678 m 18,0 a 20,20 0 0 1 20,-20 m 0,718 a 20,20 0 0 1 -20,-20 m 0,0 v -678 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -191.5,-56.5 a 16,16 0 0 1 16,-16 m -16,115 v -99 m 0,218 v -115 m 46,595 h 291 m -337,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -353,-123 h 353 m -353,4 h 353 m -337,-119 h 321 m 0,0 a 16,16 0 0 1 16,16 m 0,99 v -99 m 0,218 v -115 m 22,575 a 38,38 0 0 1 -38,38 m 38,-38 v -678 m -38,-20 a 20,20 0 0 1 20,20 m 0,678 a 20,20 0 0 1 -20,20 m 20,-20 v -678 m -2731.8461,-222 h 3787.7549"
 
 const NordlysPictogram = () => {
-  const pathRef = useRef<SVGPathElement>(null);
-  const [pathLen, setPathLen] = useState(0);
-
-  useEffect(() => {
-    if (pathRef.current) {
-        // Measure the *exact* length of the path in its own coordinate system
-        const length = pathRef.current.getTotalLength();
-        setPathLen(length);
-    }
-  }, []);
-
   return (
-    // Changed absolute positioning to relative flex so it doesn't overlap text
-    <div className="relative flex items-center justify-center pointer-events-none z-0 opacity-40 mix-blend-screen w-full mb-8">
-      <svg 
-        viewBox={SVG_VIEWBOX}
-        className="w-[90vw] h-auto md:w-[60vw] max-w-4xl"
-        preserveAspectRatio="xMidYMid meet"
-        style={{ overflow: 'visible' }}
-      >
+    // Container
+    // FIX: Removed min-h-[50vh] and md:min-h-auto hacks. 
+    // Added w-full and relative to let children shape it.
+    <div className="w-full mb-8 relative flex items-center justify-center pointer-events-none z-0">
+      
+      {/* Global Defs for Gradient */}
+      <svg width="0" height="0" className="absolute">
         <defs>
-          <linearGradient id="aurora-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4ade80" stopOpacity="0.2" /> {/* Light Green */}
-            <stop offset="25%" stopColor="#4ade80" stopOpacity="1" />   {/* Green */}
-            <stop offset="50%" stopColor="#2dd4bf" stopOpacity="1" />   {/* Teal */}
-            <stop offset="75%" stopColor="#818cf8" stopOpacity="1" />   {/* Indigo */}
-            <stop offset="100%" stopColor="#818cf8" stopOpacity="0.2" /> 
+          {/* 1. The Beam Gradient (Fades at edges, used for the glow effect) */}
+          <linearGradient id="aurora-gradient-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#4ade80" stopOpacity="0" />
+            <stop offset="20%" stopColor="#4ade80" stopOpacity="0.6" />
+            <stop offset="45%" stopColor="#2dd4bf" stopOpacity="1" />
+            <stop offset="55%" stopColor="#818cf8" stopOpacity="1" />
+            <stop offset="80%" stopColor="#a78bfa" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+          </linearGradient>
+
+          {/* 2. The Static Gradient (Solid, used for the revealed furniture) */}
+          <linearGradient id="aurora-gradient-fixed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#4ade80" stopOpacity="1" />
+            <stop offset="33%" stopColor="#2dd4bf" stopOpacity="1" />
+            <stop offset="66%" stopColor="#818cf8" stopOpacity="1" />
+            <stop offset="100%" stopColor="#a78bfa" stopOpacity="1" />
           </linearGradient>
         </defs>
-        
-        {/* QCAD uses scale(1, -1) because Y is flipped. We keep it to maintain orientation. */}
-        <g transform="scale(1,-1)">
-           <path 
-             ref={pathRef}
-             id="path75"
-             className={pathLen > 0 ? "animate-draw-aurora" : "opacity-0"}
-             fill="none"
-             stroke="url(#aurora-gradient)" 
-             strokeLinecap="round" 
-             strokeLinejoin="round"
-             
-             // Pass the calculated length to CSS
-             style={{ 
-                 '--path-len': pathLen 
-             } as React.CSSProperties}
-
-             // vectorEffect ensures 1.5px is always 1.5px on screen
-             vectorEffect="non-scaling-stroke"
-             strokeWidth="1.5" 
-             
-             d={SVG_PATH}
-           />
-        </g>
       </svg>
+
+      {/* Layer 1: The "Structure" (Base Layer) 
+          - This is revealed from left to right.
+          - It stays visible.
+          - Now uses 'aurora-gradient-fixed' so it stays colored.
+          - Increased opacity to 90 so it pops.
+      */}
+      <div className="relative flex items-center justify-center reveal-base-layer opacity-90 mix-blend-screen w-full">
+        <svg 
+          viewBox={SVG_VIEWBOX}
+          className="w-[90vw] h-auto md:w-[60vw] max-w-4xl"
+          preserveAspectRatio="xMidYMid meet"
+          style={{ overflow: 'visible' }}
+        >
+          <g transform="scale(1,-1)">
+             <path 
+               fill="none"
+               stroke="url(#aurora-gradient-fixed)" 
+               strokeLinecap="round" 
+               strokeLinejoin="round"
+               vectorEffect="non-scaling-stroke"
+               strokeWidth="1.5" 
+               d={SVG_PATH}
+             />
+          </g>
+        </svg>
+      </div>
+
+      {/* Layer 2: The "Aurora Beam" (Sweep Layer)
+          - This provides the "glow" (blur and extra width).
+          - It still uses the fading beam gradient.
+          - It still fades out at the end of the animation (opacity: 0).
+      */}
+      <div className="absolute inset-0 flex items-center justify-center aurora-beam-layer mix-blend-screen">
+        <svg 
+          viewBox={SVG_VIEWBOX}
+          className="w-[90vw] h-auto md:w-[60vw] max-w-4xl"
+          preserveAspectRatio="xMidYMid meet"
+          style={{ overflow: 'visible', filter: 'blur(5px)' }}
+        >
+          <g transform="scale(1,-1)">
+             <path 
+               fill="none"
+               stroke="url(#aurora-gradient-beam)" 
+               strokeLinecap="round" 
+               strokeLinejoin="round"
+               vectorEffect="non-scaling-stroke"
+               strokeWidth="6" 
+               d={SVG_PATH}
+             />
+          </g>
+        </svg>
+      </div>
     </div>
   );
 };
@@ -817,50 +843,47 @@ export default function App() {
             animation: slow-pan 30s ease-in-out infinite alternate;
         }
 
-        /* Aurora Animation */
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
+        /* --- AURORA ANIMATION LOGIC --- */
+        
+        /* 1. Base Layer Reveal: Starts Hidden (right), moves to Visible (left) */
+        @keyframes reveal-base {
+          0% { mask-position: 100% 0; -webkit-mask-position: 100% 0; }
+          100% { mask-position: 0% 0; -webkit-mask-position: 0% 0; }
         }
 
-        /* Draw and Fill Aurora Path Animation - NOW USING CSS VARIABLES */
-        @keyframes draw-and-fill {
-          0% { 
-            stroke-dashoffset: var(--path-len); 
-            fill-opacity: 0; 
-          }
-          60% { 
-            stroke-dashoffset: 0; 
-            fill-opacity: 0; 
-          }
-          100% { 
-            stroke-dashoffset: 0; 
-            /* REMOVED FILL OPACITY: Keeping fill 0 ensures no polygon stacking */
-            fill-opacity: 0; 
-          }
+        /* 2. Beam Sweep: Moves with the Base Layer but fades out at the end */
+        @keyframes beam-sweep {
+          0% { mask-position: 100% 0; -webkit-mask-position: 100% 0; opacity: 1; }
+          80% { opacity: 1; }
+          100% { mask-position: 0% 0; -webkit-mask-position: 0% 0; opacity: 0; } 
         }
-        
-        .animate-draw-aurora {
-          /* Using the variable calculated via JS ensure this works on ANY SVG size */
-          stroke-dasharray: var(--path-len);
-          stroke-dashoffset: var(--path-len);
+
+        .reveal-base-layer {
+          /* Gradient: Visible (Black) -> Transparent */
+          mask-image: linear-gradient(110deg, black 45%, transparent 55%);
+          -webkit-mask-image: linear-gradient(110deg, black 45%, transparent 55%);
           
-          fill: none; /* FORCE NO FILL */
-          fill-opacity: 0; /* Start transparent */
+          mask-size: 300% 100%;
+          -webkit-mask-size: 300% 100%;
           
-          animation: draw-and-fill 4s ease-out forwards;
-          animation-delay: 0.5s; 
+          /* Starts at right (hidden), moves to left (visible) */
+          mask-position: 100% 0;
+          -webkit-mask-position: 100% 0;
+
+          animation: reveal-base 3s ease-out forwards;
+          animation-delay: 0.2s;
+        }
+
+        .aurora-beam-layer {
+          /* Gradient: Transparent -> Visible (Beam) -> Transparent */
+          mask-image: linear-gradient(110deg, transparent 40%, black 50%, transparent 60%);
+          -webkit-mask-image: linear-gradient(110deg, transparent 40%, black 50%, transparent 60%);
+          
+          mask-size: 300% 100%;
+          -webkit-mask-size: 300% 100%;
+          
+          animation: beam-sweep 3s ease-out forwards;
+          animation-delay: 0.2s;
         }
 
         /* Reset Vite Default Layout Constraints */
