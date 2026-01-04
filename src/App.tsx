@@ -205,8 +205,11 @@ const ResponsiveImage: React.FC<{
 };
 
 const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, className = '' }) => {
-  const baseClass = "inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-[12px] tracking-wide cursor-pointer whitespace-nowrap";
-  const primaryClass = "bg-white text-black hover:bg-gray-200 border border-transparent";
+  // Added 'appearance-none' to remove OS/Browser default button styles
+  const baseClass = "appearance-none inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-[12px] tracking-wide cursor-pointer whitespace-nowrap";
+  
+  // Added '!' to enforce white background and black text, overriding any potential system conflicts
+  const primaryClass = "!bg-white !text-black hover:!bg-gray-200 border border-transparent";
   const secondaryClass = "bg-transparent text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm";
   
   const Component = href ? 'a' : 'button';
@@ -238,8 +241,9 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
 
 // --- New Component: Nordlys Pictogram Animation (UPDATED: BEAM SWEEP REVEAL - FIX FOR DESKTOP - COLORED END STATE) ---
 
-const SVG_VIEWBOX = "-2351.2535 -531.8549 4628.9967 952"; 
-const SVG_PATH = "m 2276.7433,-407.1451 v -12 m -4626.9968,12 v -12 m 4626.9968,0 h -4626.9968 m 4626.9968,4 h -4626.9968 m 3996.9968,331.3876 h 361 m -361,118.9016 h 361 m -361,118.9016 h 361 m -361,118.9016 h 361 m -361,118.9015 h 361 M -217.2551,-84.1182 h 361 m -361,119.0253 h 361 M -790.1395,-85.1451 h 358.8844 m -716,121 v -242 m 357.1156,242 v -242 m 3066.8828,-205 h -4626.9968 m 1918.9984,427 v -202 m 21,42 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,97.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 0,2 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 6,6 h 12 m 12,-12 a 12,12 0 0 1 -12,12 m 12,-12 v -394.5 m -30,400.5 v -400.5 m -47,201 a 20,20 0 0 1 20,20 m -20,-38 a 38,38 0 0 1 38,38 m -18,202 a 20,20 0 0 1 -20,20 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -202 m -1113.9984,42 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,97.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m 41,42.5 a 20,20 0 0 1 -20,-20 m 20,38 a 38,38 0 0 1 -38,-38 m 38,20 h 1034.9984 m -1034.9984,18 h 1034.9984 m -1099.9984,-54.5 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 413.9984,5 v -15 m 30,15 v -15 m 0,15 h -30 m 30,-15 h -30 m -437.9984,-2 v -394.5 m 36,402.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -400.5 m 363.9984,411.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 564.5,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,134 v -15 m -1281,7.9804 v -15 m 1251,22.0196 v -15 m -1281,7.9804 v -15 m 1281,22.0196 h 30 m -1311,-7.0196 h 30 m 1251,-7.9804 h 30 m -1311,-7.0196 h 30 m 1121.5,53.5196 h 313 m -1034.9984,-242 h 1034.9984 m -1034.9984,-18 h 1034.9984 m -1054.9984,38 a 20,20 0 0 1 20,-20 m -38,20 a 38,38 0 0 1 38,-38 m -20,240 v -202 m -18,202 v -202 m 2007.3768,379 h 824.2416 M 340.1358,169.185 a 50,50 0 0 1 8.6824,0.7596 m 125.6227,22.1507 -125.6227,-22.1507 m 134.3051,22.9103 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9003,27.7596 v 3 M 330.7449,169.185 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 M 1441.67,169.9446 a 50,50 0 0 1 8.6824,-0.7596 m -134.3051,22.9103 125.6227,-22.1507 m -125.6227,22.1507 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -684.2027,27 v 123.0168 m 552.9404,-31.4916 6e-4,-15 m -30.0006,14.9986 6e-4,-15 m -6e-4,15 30,0.001 m -29.9994,-15.0014 30,10e-4 m 186.0574,-15.5159 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m -2.9984,-81.0093 v 83.0093 m 39,-8 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -743.0093 m -36,751.0093 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -749.0085 m -1123,709.0093 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m 186.5,-9.5007 v -15 m 30,15 v -15 m 0,15 h -30 m 30,-15 h -30 m 552.4999,46.5162 10e-5,-123.0248 m -736,20 a 38,38 0 0 1 38,-38 m -20,38 a 20,20 0 0 1 20,-20 m -38,20 v 83.0093 m 18,-83.0093 v 83.0093 m 1055,-121.0093 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 v 83.0323 m -718,-89.0323 h 361 m -698,-32 h 1035 m -1035,18 h 1035 m 38,103.0323 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -1035.0004,17.977 a 38,38 0 0 1 -37.9992,-38 m 37.9996,20 a 20,20 0 0 1 -19.9996,-20 m 357,6.017 h 361 m -698.0008,31.983 1035.4398,0.0205 m -1035.4394,-18.0205 1035,0.023 M 312.7449,347.8642 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -743.0093 m 36,751.0093 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -749.0093 m 1945.9984,0 h -4626.9968 m 687,386.5 v -386.5 m -30,392.5 v -392.5 m -6.0032,352.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m -12,-4 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m -444.9968,-6 v -386.5 m 30,392.5 v -392.5 m 6,352.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 12,-4 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 158.3784,-133.5196 h 110.24 m -253.2275,-23.6699 a 50,50 0 0 1 8.6825,0.7597 m 125.6226,22.1506 -125.6226,-22.1506 m 134.305,22.9102 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9003,27.7596 v 3 m -66.7957,-53.6699 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 m 336.1278,-43.9102 a 50,50 0 0 1 8.6824,-0.7597 m -134.3051,22.9103 125.6227,-22.1506 m -125.6227,22.1506 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -345.2027,47 V 9.203 m 396.9984,-83.3677 V 8.836 m -396.9984,-83.0007 a 38,38 0 0 1 38,-38 m -20,121.0173 v -83.0173 m 341,-38 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 V 8.859 m -341,-121.0237 h 321 m -341,38 a 20,20 0 0 1 20,-20 m 0,0 h 321 m 38,103.0237 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -321.0004,17.9918 a 38,38 0 0 1 -37.9992,-38 m 37.9989,38 321.0003,0.0082 m -320.9997,-18.0064 a 20,20 0 0 1 -19.9995,-20 m 19.9995,20 321.0001,0.0064 m 1718.5004,95.4959 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,359 v -321 m 18,0 a 20,20 0 0 1 20,-20 m -20,341 v -321 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,302.5 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -38,-20 a 20,20 0 0 1 20,20 m 0,321 a 20,20 0 0 1 -20,20 m 20,-20 v -321 m 1698.4984,666.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,938 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m 0,-754 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,716 v -678 m 18,0 a 20,20 0 0 1 20,-20 m 0,718 a 20,20 0 0 1 -20,-20 m 0,0 v -678 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,641.5 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -678 m -38,-20 a 20,20 0 0 1 20,20 m 0,678 a 20,20 0 0 1 -20,20 m 20,-20 v -678";
+const SVG_VIEWBOX = "-2352.3785 -532.9799 4631.2467 981.6046"; 
+const SVG_PATH = "m 2276.7433,-407.1451 v -8 m -4626.9968,8 v -8 m 4626.9968,0 h -4626.9968 m 3996.9968,331.3876 h 361 m -361,118.9016 h 361 m -361,118.9016 h 361 m -361,118.9016 h 361 m -361,118.9015 h 361 M -217.2551,-84.1182 h 361 m -361,119.0253 h 361 M -790.1395,-85.1451 h 358.8844 m -716,121 v -242 m 357.1156,242 v -242 m 3066.8828,-205 h -4626.9968 m 1918.9984,427 v -202 m 21,42 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,97.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 0,2 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 6,6 h 12 m 12,-12 a 12,12 0 0 1 -12,12 m 12,-12 v -394.5 m -30,400.5 v -400.5 m -47,201 a 20,20 0 0 1 20,20 m -20,-38 a 38,38 0 0 1 38,38 m -18,202 a 20,20 0 0 1 -20,20 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -202 m -1113.9984,42 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,97.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m 41,42.5 a 20,20 0 0 1 -20,-20 m 20,38 a 38,38 0 0 1 -38,-38 m 38,20 h 1034.9984 m -1034.9984,18 h 1034.9984 m -1099.9984,-54.5 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 413.9984,5 v -15 m 30,15 v -15 m 0,15 h -30 m 30,-15 h -30 m -437.9984,-2 v -394.5 m 36,402.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -400.5 m 363.9984,411.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 564.5,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,134 v -15 m -1281,7.9804 v -15 m 1251,22.0196 v -15 m -1281,7.9804 v -15 m 1281,22.0196 h 30 m -1311,-7.0196 h 30 m 1251,-7.9804 h 30 m -1311,-7.0196 h 30 m 1121.5,53.5196 h 313 m -1034.9984,-242 h 1034.9984 m -1034.9984,-18 h 1034.9984 m -1054.9984,38 a 20,20 0 0 1 20,-20 m -38,20 a 38,38 0 0 1 38,-38 m -20,240 v -202 m -18,202 v -202 m 2007.3768,379 h 824.2416 M 340.1358,169.185 a 50,50 0 0 1 8.6824,0.7596 m 125.6227,22.1507 -125.6227,-22.1507 m 134.3051,22.9103 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9003,27.7596 v 3 M 330.7449,169.185 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 M 1441.67,169.9446 a 50,50 0 0 1 8.6824,-0.7596 m -134.3051,22.9103 125.6227,-22.1507 m -125.6227,22.1507 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -684.2027,27 v 123.0168 m 552.9404,-31.4916 6e-4,-15 m -30.0006,14.9986 6e-4,-15 m -6e-4,15 30,0.001 m -29.9994,-15.0014 30,10e-4 m 186.0574,-15.5159 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m -2.9984,-81.0093 v 83.0093 m 39,-8 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -743.0093 m -36,751.0093 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -749.0085 m -1123,709.0093 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m 186.5,-9.5007 v -15 m 30,15 v -15 m 0,15 h -30 m 30,-15 h -30 m 552.4999,46.5162 10e-5,-123.0248 m -736,20 a 38,38 0 0 1 38,-38 m -20,38 a 20,20 0 0 1 20,-20 m -38,20 v 83.0093 m 18,-83.0093 v 83.0093 m 1055,-121.0093 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 v 83.0323 m -718,-89.0323 h 361 m -698,-32 h 1035 m -1035,18 h 1035 m 38,103.0323 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -1035.0004,17.977 a 38,38 0 0 1 -37.9992,-38 m 37.9996,20 a 20,20 0 0 1 -19.9996,-20 m 357,6.017 h 361 m -698.0008,31.983 1035.4398,0.0205 m -1035.4394,-18.0205 1035,0.023 M 312.7449,347.8642 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -743.0093 m 36,751.0093 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -749.0093 m 1945.9984,0 h -4626.9968 m 687,386.5 v -386.5 m -30,392.5 v -392.5 m -6.0032,352.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m -12,-4 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m -444.9968,-6 v -386.5 m 30,392.5 v -392.5 m 6,352.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 12,-4 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 158.3784,-133.5196 h 110.24 m -253.2275,-23.6699 a 50,50 0 0 1 8.6825,0.7597 m 125.6226,22.1506 -125.6226,-22.1506 m 134.305,22.9102 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9003,27.7596 v 3 m -66.7957,-53.6699 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 m 336.1278,-43.9102 a 50,50 0 0 1 8.6824,-0.7597 m -134.3051,22.9103 125.6227,-22.1506 m -125.6227,22.1506 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -345.2027,47 V 9.203 m 396.9984,-83.3677 V 8.836 m -396.9984,-83.0007 a 38,38 0 0 1 38,-38 m -20,121.0173 v -83.0173 m 341,-38 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 V 8.859 m -341,-121.0237 h 321 m -341,38 a 20,20 0 0 1 20,-20 m 0,0 h 321 m 38,103.0237 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -321.0004,17.9918 a 38,38 0 0 1 -37.9992,-38 m 37.9989,38 321.0003,0.0082 m -320.9997,-18.0064 a 20,20 0 0 1 -19.9995,-20 m 19.9995,20 321.0001,0.0064 m 1718.5004,95.4959 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,359 v -321 m 18,0 a 20,20 0 0 1 20,-20 m -20,341 v -321 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,302.5 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -38,-20 a 20,20 0 0 1 20,20 m 0,321 a 20,20 0 0 1 -20,20 m 20,-20 v -321 m 1698.4984,666.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 47,938 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m 0,-754 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,716 v -678 m 18,0 a 20,20 0 0 1 20,-20 m 0,718 a 20,20 0 0 1 -20,-20 m 0,0 v -678 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,641.5 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -678 m -38,-20 a 20,20 0 0 1 20,20 m 0,678 a 20,20 0 0 1 -20,20 m 20,-20 v -678";
+
 const NordlysPictogram = () => {
   return (
     // Container
@@ -400,34 +404,94 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
 
 // --- Page Sections ---
 
-const LandingHero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
-  <div className="relative min-h-screen w-full bg-[#110614] text-white flex flex-col items-center justify-center overflow-hidden py-24">
-    
-    {/* Aurora Furniture Outline */}
-    <NordlysPictogram />
+const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
+  <div className="w-full bg-[#110614] text-white">
+      {/* Hero Section */}
+      <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden py-24">
+         <NordlysPictogram />
+         <div className="z-10 flex flex-col items-center justify-center relative">
+            <FadeIn delay={200}>
+              <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">70-talls retro design</p>
+            </FadeIn>
+            
+            <FadeIn delay={600}>
+                <div className="mt-12">
+                <Button primary onClick={onExplore}>
+                    Explore Collection
+                </Button>
+                </div>
+            </FadeIn>
+         </div>
+         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30 z-10">
+            <ChevronDown size={32} />
+         </div>
+      </div>
 
-    {/* Content */}
-    <div className="z-10 flex flex-col items-center justify-center relative">
-        <FadeIn delay={200}>
-        <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">70-talls retro design</p>
-        </FadeIn>
-        <FadeIn delay={400}>
-        <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white font-ubuntu lowercase">
-            nordlys møbler
-        </h1>
-        </FadeIn>
-        <FadeIn delay={600}>
-            <div className="mt-12">
-            <Button primary onClick={onExplore}>
-                Explore Collection
-            </Button>
+      {/* Section 1: Handmade in Vikna */}
+      {/* Mobile: Image Background + Boxed Text. Desktop: Split Screen. */}
+      <div className="relative min-h-screen md:min-h-[90vh] w-full flex flex-col md:flex-row">
+         {/* Image Layer */}
+         <div className="absolute inset-0 md:relative md:w-1/2 md:order-2 h-full z-0">
+            <ResponsiveImage 
+               desktopSrc="/images/nattbord_fjæra.jpg" 
+               mobileSrc="/images/nattbord_fjæra.jpg" // <-- Add your mobile image path here
+               alt="Craftsman at work"
+               className="h-full w-full object-cover"
+            />
+            {/* Mobile Overlay for contrast */}
+            <div className="absolute inset-0 bg-black/20 md:hidden"></div>
+         </div>
+
+         {/* Text Layer */}
+         <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#16081a]">
+            {/* The "Box" styling is applied here only on mobile, removed on desktop (md:) */}
+            <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                <FadeIn>
+                   <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Håndverk</span>
+                   <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Håndlaget i Vikna</h2>
+                   <p className="text-lg text-gray-200 md:text-gray-300 leading-relaxed font-light mb-8">
+                      Hvert møbel er formet av én person. Fra den første planken velges ut til den siste strøk med olje, er det en personlig reise mellom håndverkeren og treet. Ingen samlebånd, ingen snarveier. Bare tid, presisjon og lidenskap i verkstedet på Vikna.
+                   </p>
+                   <Button onClick={onExplore} className="self-start">Se kolleksjonen</Button>
+                </FadeIn>
             </div>
-        </FadeIn>
-    </div>
+         </div>
+      </div>
 
-    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30 z-10">
-      <ChevronDown size={32} />
-    </div>
+      {/* Section 2: Norwegian Oak */}
+      {/* Mobile: Image Background + Boxed Text. Desktop: Split Screen. */}
+      <div className="relative min-h-screen md:min-h-[90vh] w-full flex flex-col md:flex-row">
+         {/* Image Layer */}
+         <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0">
+             <ResponsiveImage 
+               desktopSrc="/images/vintereik.jpg" 
+               mobileSrc="/images/vintereik.jpg" // <-- Add your mobile image path here
+               alt="Norwegian Forest"
+               className="h-full w-full object-cover"
+            />
+            {/* Mobile Overlay for contrast */}
+            <div className="absolute inset-0 bg-black/20 md:hidden"></div>
+         </div>
+         
+         {/* Text Layer */}
+         <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+            {/* The "Box" styling is applied here only on mobile, removed on desktop (md:) */}
+            <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                <FadeIn>
+                   <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Materialer</span>
+                   <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Norsk Eik</h2>
+                   <p className="text-lg text-gray-200 md:text-gray-300 leading-relaxed font-light mb-8">
+                      Vi bruker eik som har vokst sakte i det nordiske klimaet. Dette gir et tett, hardt treverk med en karakter og holdbarhet som importert treverk ikke kan matche. Det er naturens eget kunstverk, foredlet for å vare i generasjoner.
+                   </p>
+                   <ul className="space-y-4 text-gray-300 md:text-gray-400">
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Kortreist materialvalg</li>
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Bærekraftig skogbruk</li>
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Naturlig oljebehandling</li>
+                   </ul>
+                </FadeIn>
+            </div>
+         </div>
+      </div>
   </div>
 );
 
@@ -495,6 +559,21 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
             <ChevronDown size={32} />
         </div>
+      </div>
+
+      {/* MOVED: Detail Image + Quote (Previously at the end) */}
+      <div className="w-full min-h-screen bg-[#110614] flex flex-col justify-center relative z-20">
+          <div className="px-6 md:px-12 mb-12 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
+          </div>
+          <div className="w-full h-[70vh] relative overflow-hidden">
+            <ResponsiveImage 
+              desktopSrc={product.detailImage2} 
+              mobileSrc={product.detailImage2Mobile}
+              alt="Lifestyle" 
+              className="w-full h-full object-cover"
+            />
+          </div>
       </div>
 
       {/* 2. Layered Scrollytelling Section */}
@@ -597,20 +676,7 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                />
             </div>
 
-            {/* Block 6: Detail Image + Quote */}
-            <div className="w-full min-h-screen bg-[#110614] flex flex-col justify-center">
-                <div className="px-6 md:px-12 mb-12 text-center max-w-4xl mx-auto">
-                    <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
-                </div>
-               <div className="w-full h-[70vh] relative overflow-hidden">
-                  <ResponsiveImage 
-                    desktopSrc={product.detailImage2} 
-                    mobileSrc={product.detailImage2Mobile}
-                    alt="Lifestyle" 
-                    className="w-full h-full object-cover"
-                  />
-               </div>
-            </div>
+            {/* Previously Block 6 (Detail Image + Quote) was here - Removed */}
 
         </div>
       </div>
@@ -1055,7 +1121,7 @@ export default function App() {
              <DefaultProductShowcase product={activeProduct} />
           )
         ) : (
-          <LandingHero onExplore={() => navigateToProduct(COLLECTION[0])} />
+          <LandingPage onExplore={() => navigateToProduct(COLLECTION[0])} />
         )}
       </main>
 
@@ -1063,7 +1129,7 @@ export default function App() {
       {!activeProduct && (
         <footer className="bg-[#110614] text-gray-500 py-12 px-6 border-t border-white/10 w-full">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase">
-            <p>&copy; 2024 Nordlys Showroom.</p>
+            <p>&copy; 2026 nordlys møbler</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-white transition-colors">Instagram</a>
               <a href="#" className="hover:text-white transition-colors">Pinterest</a>
