@@ -158,12 +158,12 @@ const EXPERIENCE_PRODUCTS = ['nattbord', 'skrivebord', 'skuffeskap', 'skjenk', '
 // --- 3D Components ---
 
 // Updated to accept a model path prop, but defaulting to nattbord for placeholders
-const PlaceholderModel: React.FC<{ rotationProgress: number; isMobile: boolean; modelPath?: string }> = ({ rotationProgress, isMobile, modelPath }) => {
+const PlaceholderModel: React.FC<{ rotationProgress: number; isMobile: boolean; modelPath?: string }> = ({ rotationProgress, isMobile, modelPath}) => {
   const meshRef = useRef<THREE.Group>(null);
   
   // Load the model. For now, we fallback to nattbord if the specific model doesn't exist or isn't passed.
   // In a real app, you'd ensure all paths exist. For this demo, we force 'nattbord.glb' as the placeholder for all.
-  const { scene } = useGLTF('/models/nattbord.glb'); 
+  const { scene } = useGLTF(modelPath || 'nattbord.glb') as any; 
   
   // Range: 90 degrees total (-45 to +45)
   const START_ROTATION = -Math.PI / 4; // -45 deg
