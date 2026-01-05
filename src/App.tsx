@@ -336,6 +336,7 @@ const NordlysPictogram = () => {
 const NATTBORD_SVG_VIEWBOX = "-2016.9086 -581.1283 4631.2467 921.2696"; 
 const NATTBORD_SVG_PATH = "m 919.2115,321.0033 h 360.9984 M -318.7836,112.149 h -361 m 0,-119.2362 h 361 m -894,-7.9264 h 361 m 2664.9918,335.9905 h -361 m 0,118.9404 h 361 m 799.0049,-769.9336 v -8 m -4626.9967,8 v -8 m 4626.9967,0 h -4626.9967 m 4626.9967,4 h -4626.9967 m 4626.9967,4 h -4626.9967 m 3129.4935,621.5196 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,134 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 M 898.2115,378.9844 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -743.0007 m 36,751.0007 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -749.0007 m 408.9967,709.0007 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -743.0007 m -36,751.0007 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 V -330.0163 M 939.2115,442.0033 a 20,20 0 0 1 -20,-20 m 20,38 a 38,38 0 0 1 -38,-38 m 38,20 h 320.9984 m -320.9984,18 h 320.9984 m 0,-260 a 20,20 0 0 1 20,20 m -20,-38 a 38,38 0 0 1 38,38 m -358.9984,-20 h 320.9984 m -320.9984,-18 h 320.9984 m 20,240 a 20,20 0 0 1 -20,20 m 38,-20 a 38,38 0 0 1 -38,38 m 20,-38 v -202 m 18,202 v -202 m -378.9984,0 a 20,20 0 0 1 20,-20 m -38,20 a 38,38 0 0 1 38,-38 m -20,240 v -202 m -18,202 v -202 m 746.4883,309.4916 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-223 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,134 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 M 2367.205,262.0033 h -3 m -1062.9884,0.008 h -3 m 535.99,-0.008 h -3 m 535.9984,-42 h -3 m -1062.9884,0.008 h -3 m 535.99,-0.008 h -3 m 541.9984,40 h -6 m -1059.9884,0.008 h -6 m 538.99,-0.008 h -6 m 538.9984,-38 h -6 m -1059.9884,0.008 h -6 m 538.99,-0.008 h -6 m 532.9984,-2 v 42 M 1301.2166,220.0117 v 42 m 532.99,-42.0084 v 42 m 532.9984,116.9789 h -3 m -529.9984,0 h -3 m 535.9984,42 h -3 m -529.9984,0 h -3 m 541.9984,-40 h -6 m -526.9984,0 h -6 m 538.9984,38 h -6 m -526.9984,0 h -6 m 532.9984,2 v -42 m -532.9984,42 v -42 m 130,-116.9789 h 3 m -1068.9883,0.008 h 3 m 529.9899,-0.008 h 3 m 529.9984,-42 h 3 m -1068.9883,0.008 h 3 m 529.9899,-0.008 h 3 m 523.9984,40 h 6 m -1071.9883,0.008 h 6 m 526.9899,-0.008 h 6 m 526.9984,-38 h 6 m -1071.9883,0.008 h 6 m 526.9899,-0.008 h 6 m 532.9984,-2 v 42 M 898.2183,220.0117 v 42 m 532.9899,-42.0084 v 42 m 532.9984,116.9789 h 3 m -535.9984,0 h 3 m 529.9984,42 h 3 m -535.9984,0 h 3 m 523.9984,-40 h 6 m -538.9984,0 h 6 m 526.9984,38 h 6 m -538.9984,0 h 6 m 508.9984,6 a 12,12 0 0 1 -12,-12 m -520.9984,12 a 12,12 0 0 1 -12,-12 m 544.9984,12 h 12 m -544.9984,0 h 12 m 959.9968,0 a 6,6 0 0 1 -6,-6 m -526.9984,6 a 6,6 0 0 1 -6,-6 m 538.9984,6 h 12 m -544.9984,0 h 12 m 544.9984,-12 a 12,12 0 0 1 -12,12 m -520.9984,-12 a 12,12 0 0 1 -12,12 m 544.9984,-12 v -742.9985 m -532.9984,742.9985 v -742.9985 m 502.9984,748.9985 v -748.9985 m -532.9984,748.9985 v -748.9985 m 88,742.9985 v -742.9985 m -532.9984,742.9985 v -742.9985 m 568.9984,750.9985 v -42 m -532.9984,42 v -42 m 526.9984,40 a 6,6 0 0 1 -6,6 m -526.9984,-6 a 6,6 0 0 1 -6,6 m 538.9984,-6 v -748.9985 m -532.9984,748.9985 v -748.9985 m 900.9984,512.0196 a 38,38 0 0 1 38,38 m -570.9984,-38 a 38,38 0 0 1 38,38 m 494.9984,-38 h -321 m -211.9984,0 h -321 m 853.9984,18 h -321 m -211.9984,0 h -321 m 532.9984,379 a 38,38 0 0 1 -38,-38 m -494.9984,38 a 38,38 0 0 1 -38,-38 m 891.9984,38 h -321 m -211.9984,0 h -321 m 532.9984,-18 a 20,20 0 0 1 -20,-20 m -512.9984,20 a 20,20 0 0 1 -20,-20 m 873.9984,20 h -321 m -211.9984,0 h -321 m 494.9984,-341 a 38,38 0 0 1 38,-38 m -570.9984,38 a 38,38 0 0 1 38,-38 m 494.9984,359 v -321 m -532.9984,321 v -321 m 550.9984,0 a 20,20 0 0 1 20,-20 m -552.9984,20 a 20,20 0 0 1 20,-20 m 512.9984,341 v -321 m -532.9984,321 v -321 m 911.9984,321 a 38,38 0 0 1 -38,38 m -494.9984,-38 a 38,38 0 0 1 -38,38 m 570.9984,-38 v -321 m -532.9984,321 v -321 m 514.9984,321 a 20,20 0 0 1 -20,20 m -512.9984,-20 a 20,20 0 0 1 -20,20 m 532.9984,-361 a 20,20 0 0 1 20,20 m -552.9984,-20 a 20,20 0 0 1 20,20 m 532.9984,321 v -321 m -532.9984,321 v -321 M -1550.2853,74.4641 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 1785.5,-168.4804 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,0 h -3 m 3,97.5 h -3 m 9,2 h -6 m 6,38 h -6 m 0,2 v -42 m 0,42 h -3 m -399.9983,-181.5 h 3 m -3,42 h 3 m -9,-40 h 6 m 0,-2 v 42 m 0,97.5 h 3 m -3,42 h 3 m -9,-141.5 h 6 m -6,101.5 h 6 m -24,44 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 426.9983,0 a 6,6 0 0 1 -6,-6 m 6,6 h 12 m 12,-12 a 12,12 0 0 1 -12,12 m 12,-12 v -394.5 m -30,400.5 v -400.5 m -444.9983,394.5 v -394.5 m 36,402.5 v -42 m -6,40 h 6 m -6,0 a 6,6 0 0 1 -6,6 m 6,-6 v -400.5 m 368,183 a 38,38 0 0 1 38,38 m -38,-20 h -321 m 0,379 a 38,38 0 0 1 -38,-38 m 359,-359 h -321 m 321,397 h -321 m 321,-18 h -321 m 0,0 a 20,20 0 0 1 -20,-20 m -18,-321 a 38,38 0 0 1 38,-38 m -20,38 a 20,20 0 0 1 20,-20 m -20,341 v -321 m -18,321 v -321 m 347.5,309.5 v -15 m 1833.9902,344.0196 v -15 M 152.7164,200.4837 v -15 m 1893.9902,344.0196 v -15 M 152.7164,200.4837 h 30 m 1863.9902,329.0196 h -30 M 232.2164,211.9837 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -18,321 a 20,20 0 0 1 -20,20 m 0,-361 a 20,20 0 0 1 20,20 m 0,321 v -321 m -61.5,294.5 h 30 m 1863.9902,329.0196 h -30 M -1327.7836,56.4837 v -386.5 m -30,392.5 v -392.5 m -6.0033,352.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m -12,-4 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m -444.9967,-6 v -386.5 m 30,392.5 v -392.5 m 6,352.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m 12,-4 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 158.3783,-133.5196 h 110.24 m -253.2274,-23.6699 a 50,50 0 0 1 8.6824,0.7597 m 125.6226,22.1506 -125.6226,-22.1506 m 134.305,22.9102 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9002,27.7596 v 3 m -66.7957,-53.6699 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 m 336.1277,-43.9102 a 50,50 0 0 1 8.6824,-0.7597 m -134.3051,22.9103 125.6227,-22.1506 m -125.6227,22.1506 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -345.2027,47 V 86.3318 M -1366.787,2.9641 V 85.9648 M -1763.7853,2.9641 a 38,38 0 0 1 38,-38 m -20,121.0173 V 2.9641 m 341,-38 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 v 83.0237 m -341,-121.0237 h 321 m -341,38 a 20,20 0 0 1 20,-20 m 0,0 h 321 m 38,103.0237 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -321.0004,17.9918 a 38,38 0 0 1 -37.9992,-38 m 37.9989,38 321.0003,0.008 m -320.9996,-18.0064 a 20,20 0 0 1 -19.9996,-20 m 19.9996,20 321,0.006 M 511.5931,269.9837 h 110.24 M 368.6056,246.3138 a 50,50 0 0 1 8.6825,0.7596 m 125.6226,22.1507 -125.6226,-22.1507 m 134.305,22.9103 a 50,50 0 0 1 -8.6824,-0.7596 m -76.9003,27.7596 v 3 m -66.7957,-53.6699 h 9.3909 m 51.4048,44.6699 a 6,6 0 0 1 6,6 m -66.7957,-6 h 60.7957 m 336.1278,-43.9103 a 50,50 0 0 1 8.6824,-0.7596 m -134.3051,22.9103 125.6227,-22.1507 m -125.6227,22.1507 a 50,50 0 0 1 -8.6824,0.7596 m 85.5827,27 v 3 m 66.7957,-53.6699 h -9.3909 m -57.4048,50.6699 a 6,6 0 0 1 6,-6 m 60.7957,0 h -60.7957 m -131.2623,118.5252 6e-4,-15 m -30.0006,14.9986 6e-4,-15 m -6e-4,15 30,0.001 m -29.9994,-15.0014 30,0.001 M 365.2147,378.9844 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m 2.9984,-81.0007 0.002,83.3677 m -27,3.633 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -743.0007 m 36,751.0007 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -749.0007 m 408.9968,709.0007 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m -2.9984,-81.0007 -0.002,83.0007 m 39,-8 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -743.0007 m -36,751.0007 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -749.0007 m -405.9984,668 a 38,38 0 0 1 38,-38 m -20,121.0172 v -83.0172 m 341,-38 a 38,38 0 0 1 38,38 m -38,-20 a 20,20 0 0 1 20,20 m 0,0 v 83.0237 m -341,-121.0237 h 321 m -341,38 a 20,20 0 0 1 20,-20 m 0,0 h 321 m 38,103.0237 a 38,38 0 0 1 -38.0008,38 m 20.0008,-38 a 20,20 0 0 1 -20.0004,20 m -321.0004,17.9917 a 38,38 0 0 1 -37.9992,-38 m 37.9989,38 321.0003,0.008 M 406.2126,441.0009 a 20,20 0 0 1 -19.9995,-20 m 19.9995,20 321.0001,0.007 M -484.2836,201.4837 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 0,-104 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-133.5 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,184 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,359 v -321 m 18,0 a 20,20 0 0 1 20,-20 m -20,341 v -321 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,302.5 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -321 m -38,-20 a 20,20 0 0 1 20,20 m 0,321 a 20,20 0 0 1 -20,20 m 20,-20 v -321 m -698.5,182.5027 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m 186.5,-125.5027 h -3 m 3,-42 h -3 m 9,40 h -6 m 6,-38 h -6 m 0,-2 v 42 m 0,88.5 h -3 m 3,42 h -3 m 9,-40 h -6 m 6,38 h -6 m 36,-6 a 12,12 0 0 1 -12,12 m 0,0 h -12 m 24,-12 v -386.5 m -36,394.5 v -42 m 12,46 a 6,6 0 0 1 -6,-6 m 0,0 v -392.5 m -409,264 h 3 m -3,-42 h 3 m -9,40 h 6 m -6,-38 h 6 m 0,-2 v 42 m 0,88.5 h 3 m -3,42 h 3 m -9,-40 h 6 m -6,38 h 6 m -24,6 a 12,12 0 0 1 -12,-12 m 12,12 h 12 m -24,-12 v -386.5 m 36,394.5 v -42 m -6,40 a 6,6 0 0 1 -6,6 m 6,-6 v -392.5 m 368,176.0027 a 38,38 0 0 1 38,38 m -359,-38 h 321 m -321,18 h 321 m -359,20 a 38,38 0 0 1 38,-38 m -38,240 v -202 m 18,0 a 20,20 0 0 1 20,-20 m -20,222 v -202 m 195.5,71.5 v -15 m -30,15 v -15 m 0,15 h 30 m -30,-15 h 30 m -175.5,183.5 a 38,38 0 0 1 -38,-38 m 38,38 h 321 m -321,-18 a 20,20 0 0 1 -20,-20 m 20,20 h 321 m 38,-20 a 38,38 0 0 1 -38,38 m 38,-38 v -202 m -38,-20 a 20,20 0 0 1 20,20 m 0,202 a 20,20 0 0 1 -20,20 m 20,-20 v -202"; 
 
+
 const NattbordPictogram = () => {
   return (
     // Container
@@ -437,7 +438,7 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
         // We pan diagonally: X (-5% to +5%), Y (-3% to +3%)
         // Scale constant at 1.3 to ensure edges are covered
         const panRangeX = 10; 
-        const panRangeY = 6;
+        const panRangeY = 10;
         
         const x = (progress - 0.5) * panRangeX; 
         const y = (progress - 0.5) * panRangeY; 
@@ -511,23 +512,27 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
 
       {/* Section 1: Handmade in Vikna */}
       {/* Mobile: Image Background + Boxed Text. Desktop: Split Screen. */}
+      {/* OPTION 1: Floating Image Layout on Desktop */}
       <div className="relative min-h-screen md:min-h-[90vh] w-full flex flex-col md:flex-row">
-         {/* Image Layer */}
-         <div className="absolute inset-0 md:relative md:w-1/2 md:order-2 h-full z-0">
-            <ResponsiveImage 
-               desktopSrc="/images/nattbord_fjæra.jpg" 
-               mobileSrc="/images/nattbord_fjæra.jpg" // <-- Add your mobile image path here
-               alt="Craftsman at work"
-               className="h-full w-full object-cover"
-            />
-            {/* Mobile Overlay for contrast */}
+         {/* Image Layer - Modified for Floating Effect on Desktop */}
+         <div className="absolute inset-0 md:relative md:w-1/2 md:order-2 h-full z-0 md:p-8">
+            {/* Inner Wrapper for Rounding & Clipping on Desktop */}
+            <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+              <ResponsiveImage 
+                desktopSrc="/images/nattbord_fjæra.jpg" 
+                mobileSrc="/images/nattbord_fjæra.jpg" 
+                alt="Craftsman at work"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* Mobile Overlay for contrast - Only visible when NOT floated (mobile) */}
             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
          </div>
 
          {/* Text Layer */}
-         <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#16081a]">
+         <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 pb-8 md:p-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
             {/* The "Box" styling is applied here only on mobile, removed on desktop (md:) */}
-            <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+            <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                 <FadeIn>
                    <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Håndverk</span>
                    <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Håndlaget i Vikna</h2>
@@ -542,23 +547,27 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => (
 
       {/* Section 2: Norwegian Oak */}
       {/* Mobile: Image Background + Boxed Text. Desktop: Split Screen. */}
+      {/* OPTION 1: Floating Image Layout on Desktop */}
       <div className="relative min-h-screen md:min-h-[90vh] w-full flex flex-col md:flex-row">
-         {/* Image Layer */}
-         <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0">
-             <ResponsiveImage 
-               desktopSrc="/images/vintereik.jpg" 
-               mobileSrc="/images/vintereik.jpg" // <-- Add your mobile image path here
-               alt="Norwegian Forest"
-               className="h-full w-full object-cover"
-            />
+         {/* Image Layer - Modified for Floating Effect on Desktop */}
+         <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:p-8">
+             {/* Inner Wrapper for Rounding & Clipping */}
+             <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+                <ResponsiveImage 
+                  desktopSrc="/images/vintereik.jpg" 
+                  mobileSrc="/images/vintereik.jpg" 
+                  alt="Norwegian Forest"
+                  className="h-full w-full object-cover"
+                />
+             </div>
             {/* Mobile Overlay for contrast */}
             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
          </div>
          
          {/* Text Layer */}
-         <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+         <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 pb-8 md:p-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
             {/* The "Box" styling is applied here only on mobile, removed on desktop (md:) */}
-            <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+            <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                 <FadeIn>
                    <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Materialer</span>
                    <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Norsk Eik</h2>
@@ -657,21 +666,24 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       </div>
 
       {/* Intro Section: Split Screen (Image Left | Text Right) */}
+      {/* OPTION 1: Floating Image Layout on Desktop */}
       <div className="relative min-h-screen w-full flex flex-col md:flex-row z-20">
           {/* Image Layer - Left on Desktop */}
-          <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0">
-             <ResponsiveImage 
-                desktopSrc={product.detailImage2} 
-                mobileSrc={product.detailImage2Mobile}
-                alt="Lifestyle" 
-                className="h-full w-full object-cover"
-             />
+          <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:p-8">
+             <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+                <ResponsiveImage 
+                    desktopSrc={product.detailImage2} 
+                    mobileSrc={product.detailImage2Mobile}
+                    alt="Lifestyle" 
+                    className="h-full w-full object-cover"
+                />
+             </div>
              <div className="absolute inset-0 bg-black/20 md:hidden"></div>
           </div>
           
           {/* Text Layer - Right on Desktop */}
-          <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
-             <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+          <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 pb-8 md:p-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+             <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                  <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"We removed everything unnecessary, until only the essential remained."</h3>
              </div>
           </div>
@@ -700,8 +712,9 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
            </div>
 
            {/* RIGHT SIDE: Canvas (Mobile: Full Width, Desktop: 1/2 Width) */}
-           <div className="w-full md:w-1/2 h-full relative">
-               <div className="absolute inset-0 w-full h-full">
+           {/* OPTION 1: Floating Canvas on Desktop */}
+           <div className="w-full md:w-1/2 h-full relative md:p-8">
+               <div className="absolute inset-0 w-full h-full md:static md:w-full md:h-full md:rounded-2xl overflow-hidden shadow-2xl md:shadow-none bg-[#110614] md:bg-transparent border border-white/5 md:border-0">
                   <Canvas camera={{ position: [0, 0, isMobile ? 9 : 6], fov: 45 }}>
                      <ambientLight intensity={0.5} />
                      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
@@ -709,14 +722,14 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
                      <Environment preset="city" />
                      <PlaceholderModel rotationProgress={rotationProgress} isMobile={isMobile} />
                   </Canvas>
-               </div>
-               
-               {/* SCROLL HINT (Option 1: Pulse Chevron) */}
-               <div 
-                 className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-700 ${showScrollHint ? 'opacity-100' : 'opacity-0'}`}
-               >
-                  <div className="flex flex-col items-center animate-bounce">
-                    <ChevronDown className="text-white/50" size={32} />
+                  
+                  {/* SCROLL HINT (Option 1: Pulse Chevron) */}
+                  <div 
+                    className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-700 ${showScrollHint ? 'opacity-100' : 'opacity-0'}`}
+                  >
+                      <div className="flex flex-col items-center animate-bounce">
+                        <ChevronDown className="text-white/50" size={32} />
+                      </div>
                   </div>
                </div>
            </div>
@@ -732,8 +745,8 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
              {/* Block 1: Smoked Oak (Text Left | Model Right) */}
              <div className="min-h-screen w-full flex flex-col md:flex-row">
                  {/* MOBILE ONLY: Text Overlay */}
-                 <div className="relative z-10 w-full md:hidden flex flex-col justify-end p-6 pb-24 min-h-screen bg-transparent">
-                     <div className="w-full bg-black/40 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
+                 <div className="relative z-10 w-full md:hidden flex flex-col justify-end p-6 pb-8 min-h-screen bg-transparent">
+                     <div className="w-full bg-black/30 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">Smoked Oak.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
                             Sourced from sustainable forests in Northern Europe. The wood is smoked to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
@@ -759,22 +772,24 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
       {/* We apply -mt-[100vh] on mobile to pull this section up over the empty buffer we created, keeping the flow seamless */}
       <div className="relative z-20 bg-[#110614] -mt-[100vh] md:mt-0">
             {/* Block 2+3: Silent Motion (Image Left | Text Right) */}
-            {/* Split Screen combining Hero Image and Text */}
+            {/* OPTION 1: Floating Image Layout on Desktop */}
             <div className="relative min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
                {/* Image Layer - Left on Desktop */}
-               <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-1">
-                  <ResponsiveImage 
-                    desktopSrc={product.heroImage} 
-                    mobileSrc={product.heroImageMobile}
-                    alt="Hero" 
-                    className="h-full w-full object-cover"
-                  />
+               <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-1 md:p-8">
+                  <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+                    <ResponsiveImage 
+                        desktopSrc={product.heroImage} 
+                        mobileSrc={product.heroImageMobile}
+                        alt="Hero" 
+                        className="h-full w-full object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-black/20 md:hidden"></div>
                </div>
 
                {/* Text Layer - Right on Desktop */}
-               <div className="relative z-10 w-full md:w-1/2 md:order-2 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
-                    <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+               <div className="relative z-10 w-full md:w-1/2 md:order-2 flex flex-col justify-end md:justify-center p-6 pb-8 md:p-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+                    <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">Silent Motion.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-6">
                             Precision-engineered soft-close hinges ensure your peace is never disturbed. The drawer glides effortlessly, respecting the silence of your sanctuary.
@@ -785,29 +800,33 @@ const NattbordExperience: React.FC<{ product: Product }> = ({ product }) => {
             </div>
 
             {/* Block 4: Cinematic Material Detail (Scroll Linked) */}
+            {/* Kept as Full Width (No Floating) for Immersive Effect */}
             <CinematicMaterial 
-                image="/images/close_up.jpg"
-                mobileImage="/images/close_up.jpg" // Example mobile crop
+                image="/images/nm34L_close_up.jpg"
+                mobileImage="/images/close_up.jpg" 
                 title="Presisjonsarbeid" 
                 subtitle="Detaljer" 
             />
 
             {/* Block 5+5.5: Integrated Power (Text Left | Image Right) */}
+            {/* OPTION 1: Floating Image Layout on Desktop */}
              <div className="relative min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
                  {/* Image Layer - Right on Desktop */}
-                 <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-2">
-                    <ResponsiveImage 
-                      desktopSrc={product.detailImage1} 
-                      mobileSrc={product.detailImage1Mobile}
-                      alt="Detail View" 
-                      className="h-full w-full object-cover"
-                    />
+                 <div className="absolute inset-0 md:relative md:w-1/2 h-full z-0 md:order-2 md:p-8">
+                    <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+                        <ResponsiveImage 
+                        desktopSrc={product.detailImage1} 
+                        mobileSrc={product.detailImage1Mobile}
+                        alt="Detail View" 
+                        className="h-full w-full object-cover"
+                        />
+                    </div>
                     <div className="absolute inset-0 bg-black/20 md:hidden"></div>
                  </div>
 
                  {/* Text Layer - Left on Desktop */}
-                 <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 md:p-24 pb-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
-                     <div className="w-full bg-black/60 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
+                 <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 pb-8 md:p-24 md:pb-0 h-full min-h-screen md:min-h-auto bg-transparent md:bg-[#110614]">
+                     <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">Integrated Power.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light">
                             Hidden cable management and optional wireless charging integration keep your devices ready for the morning without cluttering your night.
@@ -872,14 +891,17 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
       </div>
 
       {/* 2. Hero Image & Key Details */}
+      {/* OPTION 1: Floating Image Layout on Desktop */}
       <div className="min-h-screen w-full relative flex flex-col md:flex-row">
-         <div className="w-full md:w-1/2 h-[50vh] md:h-auto relative">
-            <ResponsiveImage 
-                desktopSrc={product.heroImage} 
-                mobileSrc={product.heroImageMobile}
-                alt={product.name} 
-                className="w-full h-full object-cover"
-            />
+         <div className="w-full md:w-1/2 h-[50vh] md:h-auto relative md:p-8">
+            <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+                <ResponsiveImage 
+                    desktopSrc={product.heroImage} 
+                    mobileSrc={product.heroImageMobile}
+                    alt={product.name} 
+                    className="w-full h-full object-cover"
+                />
+            </div>
             <div className="absolute inset-0 bg-black/10"></div>
          </div>
 
@@ -926,13 +948,17 @@ const DefaultProductShowcase: React.FC<{ product: Product }> = ({ product }) => 
             </ul>
           </FadeIn>
         </div>
-        <div className="h-[60vh] md:h-auto overflow-hidden">
-          <ResponsiveImage 
-            desktopSrc={product.detailImage1} 
-            mobileSrc={product.detailImage1Mobile}
-            alt="Detail" 
-            className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-          />
+        
+        {/* OPTION 1: Floating Image Layout on Desktop */}
+        <div className="h-[60vh] md:h-auto overflow-hidden md:p-8 bg-[#110614]">
+          <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+            <ResponsiveImage 
+                desktopSrc={product.detailImage1} 
+                mobileSrc={product.detailImage1Mobile}
+                alt="Detail" 
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
         </div>
       </div>
 
