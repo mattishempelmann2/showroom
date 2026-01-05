@@ -1186,7 +1186,7 @@ export default function App() {
         {activeProduct ? (
           // Updated Logic: Check if the product is in our "Experience" list
           EXPERIENCE_PRODUCTS.includes(activeProduct.id) ? (
-             <ProductExperience product={activeProduct} onOpenMenu={openMenu} />
+             <ProductExperience key={activeProduct.id} product={activeProduct} onOpenMenu={openMenu} />
           ) : (
              <DefaultProductShowcase product={activeProduct} onOpenMenu={openMenu} />
           )
