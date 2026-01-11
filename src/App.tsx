@@ -11,6 +11,10 @@ interface Product {
   type: string;
   tagline: string;
   description: string;
+  text1?: string;
+  text2?: string;
+  text3?: string;
+  text4?:string
   price: string | null;
   heroImage: string;
   heroImageMobile?: string;
@@ -40,6 +44,10 @@ const COLLECTION: Product[] = [
     type: 'Nightstand',
     tagline: 'Quiet companion for the night.',
     description: 'Minimalist bedside storage designed to keep your sanctuary clutter-free. Crafted from smoked oak with a soft-close mechanism that respects the silence of the bedroom.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €850',
     heroImage: '/images/nattbord_natur.jpg',
     heroImageMobile: '/images/nattbord_natur.jpg',
@@ -58,6 +66,10 @@ const COLLECTION: Product[] = [
     type: 'Workspace',
     tagline: 'Clarity for your thoughts.',
     description: 'The Horizon desk offers a distraction-free surface of linoleum and walnut. Designed to organize your cables and your mind, perfect for the modern home office.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €1,400',
     heroImage: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2070',
@@ -72,6 +84,10 @@ const COLLECTION: Product[] = [
     type: 'Drawer Cabinet',
     tagline: 'Everything in its place.',
     description: 'A tall, slender cabinet featuring vertical grain matching. Each drawer is perfectly sized for documents, sketches, or personal treasures.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €2,100',
     heroImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1595515106969-1ce29569ff53?auto=format&fit=crop&q=80&w=2070',
@@ -87,6 +103,10 @@ const COLLECTION: Product[] = [
     type: 'Sideboard',
     tagline: 'The anchor of the room.',
     description: 'Low, long, and elegant. This sideboard features sliding doors woven from paper cord, hiding your media units while allowing remote signals to pass through.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €3,200',
     heroImage: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=2070',
@@ -102,6 +122,10 @@ const COLLECTION: Product[] = [
     type: 'Dresser',
     tagline: 'Storage reimagined.',
     description: 'A classic dresser silhouette modernized with sharp angles and floating feet. Built to last generations, with dovetail joinery in every drawer.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €2,800',
     heroImage: 'https://images.unsplash.com/photo-1595514020173-66b6e3a6a93e?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&q=80&w=2070',
@@ -117,6 +141,10 @@ const COLLECTION: Product[] = [
     type: 'Bespoke Services',
     tagline: 'Your vision, our craft.',
     description: 'For those who need something unique. We work with you to design and build furniture that fits your specific space and dimensions perfectly.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'Price on Request',
     heroImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1601057476885-d2fc76451e50?auto=format&fit=crop&q=80&w=2070',
@@ -132,6 +160,10 @@ const COLLECTION: Product[] = [
     type: 'Decor & Lighting',
     tagline: 'The finishing touches.',
     description: 'Sculpted light and hand-turned objects. Our accessories collection brings the warmth of Nordic design into the smallest details of your home.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: 'From €150',
     heroImage: 'https://images.unsplash.com/photo-1513506003013-d3c734b42029?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&q=80&w=2070',
@@ -147,6 +179,10 @@ const COLLECTION: Product[] = [
     type: 'Our Story',
     tagline: 'Born from the north.',
     description: 'Nordlys was founded on the belief that furniture should be quiet, durable, and beautiful. We manufacture everything in our workshop in Oslo, using only sustainable materials.',
+    text1: 'At Nordlys Møbler, we believe your home should be a sanctuary of light and comfort. Inspired by the serene beauty of the Scandinavian landscape, our furniture combines timeless minimalism with modern functionality. Every piece is crafted to bring warmth to your living space, reflecting the quiet elegance of the Northern Lights. Whether you are looking for a statement sofa or a rustic dining table, we curate designs that stand the test of time. Experience the art of Nordic living with us.',
+    text2: 'True quality lies in the details. Our collection emphasizes natural materials, from robust solid oak to soft, organic textiles. We partner with skilled artisans who value traditional joinery techniques, ensuring that every chair, table, and cabinet is built to last for generations. At Nordlys Møbler, we dont just sell furniture we offer sustainable heirlooms. By prioritizing eco-friendly sourcing and durable construction, we help you create a home that is as responsible as it is beautiful. Feel the difference of authentic craftsmanship',
+    text3: 'Create space for lifes best moments. Whether its a cozy evening by the fire or a lively dinner party with friends, Nordlys Møbler sets the stage for connection. Our designs prioritize comfort without compromising on style, embracing the true spirit of hygge. Transform your house into a welcoming home where every corner invites you to relax and unwind. With soft textures, warm tones, and ergonomic shapes, our furniture helps you slow down and enjoy the simple pleasures of everyday life',
+    text4: 'Elevate your interior with the essence of the North. Nordlys Møbler offers an exclusive selection of modern furniture tailored for the contemporary home. We blend clean lines with rustic warmth to create spaces that breathe. From compact city apartments to spacious country homes, find the perfect pieces to express your unique style. Explore our latest arrivals today and discover how effortless elegance can transform your room. Design that looks good, feels good, and lives well.',
     price: null,
     heroImage: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=2070',
     detailImage1: 'https://images.unsplash.com/photo-1459749411177-287ce3288b71?auto=format&fit=crop&q=80&w=2070',
@@ -672,7 +708,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
           {/* Text Layer - Right on Desktop */}
           <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 pb-24 md:p-24 md:pb-0 h-full md:min-h-auto bg-transparent md:bg-[#110614] pointer-events-none md:pointer-events-auto">
              <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
-                 <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"{product.tagline}"</h3>
+                 <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"{product.text1}"</h3>
              </div>
           </div>
       </div>
@@ -691,8 +727,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                <div className="max-w-xl">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat1}.</h2>
                     <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
-                        {/* Placeholder text required to fill space, as per request. */}
-                        Sourced from sustainable forests in Northern Europe. The material is treated to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
+                        "{product.text2}"
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Button onClick={onOpenMenu}>Utforsk mer</Button>
@@ -782,8 +817,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                     <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat2}.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-6">
-                            {/* Placeholder text */}
-                            Precision-engineered mechanisms ensure your peace is never disturbed. Every interaction is designed to respect the silence of your sanctuary.
+                            "{product.text3}"
                         </p>
                         <p className="text-lg italic text-white/60 mb-8">"A silhouette that defines the room."</p>
                         
@@ -825,8 +859,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                      <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat3}.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
-                           {/* Placeholder text */}
-                            Hidden functionality and smart integration keep your life organized without cluttering your environment. Design that works for you.
+                           "{product.text4}"
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                            <Button onClick={onOpenMenu}>Utforsk mer</Button>
