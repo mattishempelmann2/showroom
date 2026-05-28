@@ -1,4 +1,5 @@
-import puppeteer from 'puppeteer';
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 import { spawn } from 'child_process';
 import { mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
@@ -19,8 +20,22 @@ const ROUTES = [
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// @sparticuz/chromium is built for Linux (Vercel/CI).
+// Locally, fall back to the system Chrome installation.
+const LOCAL_CHROME = {
+  darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  win32: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  linux: '/usr/bin/google-chrome',
+};
+
+const getExecutablePath = async () => {
+  if (process.env.CI || process.env.VERCEL) {
+    return chromium.executablePath();
+  }
+  return LOCAL_CHROME[process.platform] ?? LOCAL_CHROME.linux;
+};
+
 async function prerender() {
-  // Start vite preview to serve the built dist/
   const server = spawn('npx', ['vite', 'preview', '--port', String(PORT)], {
     stdio: 'pipe',
     shell: process.platform === 'win32',
@@ -28,17 +43,21 @@ async function prerender() {
 
   server.stderr.on('data', (d) => process.stderr.write(d));
 
-  // Wait until the server signals it's ready
   await new Promise((resolve) => {
     server.stdout.on('data', (data) => {
       if (data.toString().includes('localhost')) resolve();
     });
-    setTimeout(resolve, 4000); // fallback
+    setTimeout(resolve, 4000);
   });
 
+  const isCI = !!(process.env.CI || process.env.VERCEL);
+  const executablePath = await getExecutablePath();
   const browser = await puppeteer.launch({
+    args: isCI
+      ? [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox']
+      : ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath,
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
   });
 
   let failed = 0;
@@ -46,18 +65,15 @@ async function prerender() {
   for (const route of ROUTES) {
     const url = `http://localhost:${PORT}${route}`;
     const page = await browser.newPage();
-
-    // Suppress non-critical browser errors (e.g. WebGL unavailable in headless)
     page.on('pageerror', () => {});
 
     try {
       await page.goto(url, { waitUntil: 'networkidle2', timeout: 20000 });
-      // Give React effects (meta tag updates) a moment to flush
       await wait(600);
 
       let html = await page.content();
-      // Replace any localhost references left in canonical / og:url tags
       html = html.replaceAll(`http://localhost:${PORT}`, process.env.VITE_SITE_URL ?? '');
+
       const dir = route === '/' ? DIST : join(DIST, route);
       mkdirSync(dir, { recursive: true });
       writeFileSync(join(dir, 'index.html'), html);
