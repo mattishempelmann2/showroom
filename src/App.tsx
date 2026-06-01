@@ -322,7 +322,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
          <NordlysPictogram />
          <div className="z-10 flex flex-col items-center justify-center relative">
             <FadeIn delay={200}>
-              <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">HANDMADE - SCANDINAVIAN - FURNITURE</p>
+              <p className="mb-6 font-medium uppercase text-gray-400 font-sans text-center whitespace-nowrap text-[clamp(0.6rem,3vw,0.875rem)] tracking-[0.2em] sm:tracking-[0.3em]">HANDMADE - SCANDINAVIAN - FURNITURE</p>
             </FadeIn>
             
             <FadeIn delay={600}>
@@ -532,7 +532,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                <div className="max-w-xl">
                     <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat1}.</h2>
                     <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
-                        "{product.text2}"
+                        {product.text2}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Button onClick={onOpenMenu}>Utforsk mer</Button>
@@ -588,8 +588,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                      <div className="w-full bg-black/30 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
                         <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat1}.</h2>
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
-                            {/* Placeholder text */}
-                            Sourced from sustainable forests in Northern Europe. The material is treated to achieve a deep, rich color that permeates the grain, not just a surface stain. A texture you can feel.
+                            {product.text2}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full">
                             <Button onClick={onOpenMenu} className="w-full">Utforsk mer</Button>
