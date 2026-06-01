@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ChevronDown, ChevronRight, Menu, X, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X, ShoppingBag } from 'lucide-react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, ContactShadows, useGLTF } from '@react-three/drei'; 
 import * as THREE from 'three';
 import { COLLECTION, type Product, type ButtonProps } from './data/collection';
 import { SVG_VIEWBOX, SVG_PATH } from './data/svgConstants';
 
-
-// List of products that should get the "Experience" layout
-const EXPERIENCE_PRODUCTS = ['nattbord', 'skrivebord', 'skuffeskap', 'skjenk', 'kommode', 'custom', 'interior', 'om-oss'];
 
 // --- 3D Components ---
 
@@ -177,8 +174,9 @@ const NordlysPictogram = () => {
 
 const ProductPictogram = ({ product }: { product: Product }) => {
   // Using generic ID for gradients to prevent conflicts if multiple exist, though we only render one page at a time.
-  const gradientIdBeam = `product-${product.id}-gradient-beam`;
-  const gradientIdFixed = `product-${product.id}-gradient-fixed`;
+  const safeId = product.id.replace(/[^a-zA-Z0-9_-]/g, '-');
+  const gradientIdBeam = `product-${safeId}-gradient-beam`;
+  const gradientIdFixed = `product-${safeId}-gradient-fixed`;
   const viewBoxProduct = product.pictogramViewBox;
   const path = product.pictogramPath; 
 
@@ -324,7 +322,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
          <NordlysPictogram />
          <div className="z-10 flex flex-col items-center justify-center relative">
             <FadeIn delay={200}>
-              <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">70-talls retro design</p>
+              <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">HANDMADE - SCANDINAVIAN - FURNITURE</p>
             </FadeIn>
             
             <FadeIn delay={600}>
@@ -360,7 +358,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
                    <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Håndverk</span>
                    <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Håndlaget i Vikna</h2>
                    <p className="text-lg text-gray-200 md:text-gray-300 leading-relaxed font-light mb-8">
-                      Hvert møbel er formet av én person. Fra den første planken velges ut til det siste strøk med olje, er det en personlig reise mellom håndverkeren og treet. Ingen samlebånd, ingen snarveier. Bare tid, presisjon og lidenskap i verkstedet på Vikna.
+                      Hos nordlys møbler møter skandinavisk design et kompromissløst håndverk. Med et tydelig nikk til 70-talls retro og tidløse, avrundede former, skaper vi objekter i massiv eik. Ingen masseproduksjon, bare ærlige møbler bygget for å passe inn overalt og tåle hverdagens bruk i generasjoner.
                    </p>
                    <div className="flex flex-col sm:flex-row gap-4">
                      <Button onClick={onOpenMenu}>Utforsk mer</Button>
@@ -391,12 +389,12 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
                    <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">Materialer</span>
                    <h2 className="text-4xl md:text-5xl font-light mb-8 font-ubuntu">Norsk Eik</h2>
                    <p className="text-lg text-gray-200 md:text-gray-300 leading-relaxed font-light mb-8">
-                      Vi bruker eik som har vokst sakte i det nordiske klimaet. Dette gir et tett, hardt treverk med en karakter og holdbarhet som importert treverk ikke kan matche.
+                      Norges spektakulære natur, solide råvarer og et usedvanlig ærlig samfunn gir den perfekte grobunnen for nordlys møbler. Her ute i havgapet på Vikna, i mitt "knøttsmå" verksted, tar jeg imot eikestokkene. Å lokke frem treets fineste egenskaper krever ro. Når jeg lar eikens mønster diktere linjene, og former materialet til det uttrykker nøyaktig den samme harmonien som landskapet utenfor, føles håndverket brått som et litt annet og langt mer visjonært kall.
                    </p>
                    <ul className="space-y-4 text-gray-300 md:text-gray-400 mb-8">
-                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Kortreist materialvalg</li>
-                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Bærekraftig skogbruk</li>
-                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Naturlig oljebehandling</li>
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Norske råvarer og storslått natur som fundament</li>
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Unike møbler skapt med kompromissløs tålmodighet</li>
+                      <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Produsert i et "knøttlite" verksted ute i havgapet på Vikna</li>
                    </ul>
                    <div className="flex flex-col sm:flex-row gap-4">
                      <Button onClick={onOpenMenu}>Utforsk mer</Button>
@@ -483,7 +481,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
         <ProductPictogram product={product} />
 
         <FadeIn delay={200}>
-            <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans">{product.tagline}</p>
+            <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-gray-400 font-sans text-center">{product.tagline}</p>
         </FadeIn>
 
         <FadeIn delay={300}>
@@ -634,7 +632,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                         <p className="text-xl text-gray-300 leading-relaxed font-light mb-6">
                             "{product.text3}"
                         </p>
-                        <p className="text-lg italic text-white/60 mb-8">"A silhouette that defines the room."</p>
+                        <p className="text-lg italic text-white/60 mb-8">"{product.tagline2}"</p>
                         
                         <div className="flex flex-col sm:flex-row gap-4">
                            <Button onClick={onOpenMenu}>Utforsk mer</Button>
@@ -680,143 +678,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
       
       {/* 5. Final CTA */}
       <div className="pb-32 text-center bg-[#110614] relative z-20">
-         <Button primary href={product.shopifyLink}>Configure Yours</Button>
-      </div>
-    </div>
-  );
-};
-
-// --- Default Product Showcase (for Custom, Accessories, Om oss) ---
-const DefaultProductShowcase: React.FC<{ product: Product; onOpenMenu: () => void }> = ({ product, onOpenMenu }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [product]);
-
-  const isAboutPage = product.id === 'om-oss';
-
-  return (
-    <div className="min-h-screen bg-[#110614] text-white w-full">
-      {/* 1. Solid Cover Screen */}
-      <div className="h-screen w-full bg-[#110614] flex flex-col items-center justify-center relative px-6">
-        <FadeIn delay={300}>
-          <h1 className="text-6xl md:text-9xl font-bold tracking-tight mb-4 text-center font-ubuntu lowercase">
-            {product.name}
-          </h1>
-          <div className="h-1 w-24 bg-white/20 mx-auto rounded-full"></div>
-        </FadeIn>
-        
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
-            <ChevronDown size={32} />
-        </div>
-      </div>
-
-      {/* 2. Hero Image & Key Details */}
-      <div className="relative min-h-[140vh] md:min-h-screen w-full flex flex-col md:flex-row">
-         {/* Image Layer - Sticky on Mobile */}
-         <div className="sticky top-0 h-screen w-full md:relative md:h-auto md:w-1/2 md:p-8 z-0">
-            <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
-                <ResponsiveImage 
-                    desktopSrc={product.heroImage} 
-                    mobileSrc={product.heroImageMobile}
-                    alt={product.name} 
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div className="absolute inset-0 bg-black/10"></div>
-         </div>
-
-         {/* Text Layer - Scrolls over image on Mobile */}
-         <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 pb-24 md:p-24 md:pb-0 h-full md:min-h-auto bg-transparent md:bg-[#110614] pointer-events-none md:pointer-events-auto">
-             <div className="pointer-events-auto w-full">
-                <FadeIn>
-                    {!isAboutPage && (
-                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-amber-500 mb-4 block">Product Overview</span>
-                    )}
-                    <h2 className="text-3xl md:text-4xl font-light mb-6 font-ubuntu">{product.type}</h2>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 font-light">
-                    {product.tagline}
-                    </p>
-                    
-                    <div className="flex flex-col gap-6">
-                        {product.price && <p className="text-2xl font-medium">{product.price}</p>}
-                        
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Button onClick={onOpenMenu}>Utforsk mer</Button>
-                            <Button primary href={product.shopifyLink}>
-                                {isAboutPage ? 'Contact Us' : 'Tilpass din'} <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
-                        </div>
-                    </div>
-                </FadeIn>
-             </div>
-         </div>
-      </div>
-
-      {/* 3. Story Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-        <div className="bg-[#16081a] p-12 md:p-24 flex flex-col justify-center">
-          <FadeIn>
-            <span className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4 block">
-              {isAboutPage ? 'Our Philosophy' : 'The Story'}
-            </span>
-            <h3 className="text-2xl md:text-3xl font-light mb-8 leading-relaxed font-ubuntu">
-              {product.description}
-            </h3>
-            <ul className="space-y-4">
-              {product.features.map((feature, i) => (
-                <li key={i} className="flex items-center text-gray-400 border-b border-white/10 pb-4">
-                  <ChevronRight className="h-4 w-4 mr-4 text-white" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-        
-        <div className="h-[60vh] md:h-auto overflow-hidden md:p-8 bg-[#110614]">
-          <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
-            <ResponsiveImage 
-                desktopSrc={product.detailImage1} 
-                mobileSrc={product.detailImage1Mobile}
-                alt="Detail" 
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* 4. Full Width Visual */}
-      <div className="relative h-[80vh] w-full overflow-hidden">
-         <ResponsiveImage 
-            desktopSrc={product.detailImage2} 
-            mobileSrc={product.detailImage2Mobile}
-            alt="Lifestyle" 
-            className="h-full w-full object-cover fixed-attachment"
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-[#110614]/40">
-             <div className="text-center p-8 backdrop-blur-md bg-[#110614]/30 rounded-xl border border-white/10 max-w-lg">
-                <h4 className="text-2xl font-light mb-2 font-ubuntu">Designet i Norge</h4>
-                <p className="text-gray-300">Skandinavisk minimalisme.</p>
-             </div>
-          </div>
-      </div>
-
-      {/* Footer CTA */}
-      <div className="bg-white text-black py-32 px-6 text-center">
-        <h3 className="text-4xl md:text-6xl font-light mb-8 font-ubuntu">
-          {isAboutPage ? 'Visit our showroom.' : 'Make it yours.'}
-        </h3>
-        {product.price && <p className="text-gray-600 mb-10 text-xl">Starting at {product.price}</p>}
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
-          {!isAboutPage && (
-            <Button className="bg-black text-white hover:bg-gray-800" href={product.shopifyLink}>
-              Configure Your {product.name}
-            </Button>
-          )}
-          <Button className="bg-transparent text-black border border-black hover:bg-gray-100">
-             Contact Showroom
-          </Button>
-        </div>
+         <Button primary href={product.shopifyLink}>Tilpass din</Button>
       </div>
     </div>
   );
@@ -1094,12 +956,7 @@ export default function App() {
       {/* Main Content */}
       <main className="w-full">
         {activeProduct ? (
-          // Updated Logic: Check if the product is in our "Experience" list
-          EXPERIENCE_PRODUCTS.includes(activeProduct.id) ? (
-             <ProductExperience key={activeProduct.id} product={activeProduct} onOpenMenu={openMenu} />
-          ) : (
-             <DefaultProductShowcase product={activeProduct} onOpenMenu={openMenu} />
-          )
+          <ProductExperience key={activeProduct.id} product={activeProduct} onOpenMenu={openMenu} />
         ) : (
           <LandingPage onExplore={() => navigateToProduct(COLLECTION[0])} onOpenMenu={openMenu} />
         )}

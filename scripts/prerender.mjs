@@ -9,7 +9,7 @@ const DIST = 'dist';
 const ROUTES = [
   '/',
   '/nattbord',
-  '/skrivebord',
+  '/pult-benk',
   '/skuffeskap',
   '/skjenk',
   '/kommode',
