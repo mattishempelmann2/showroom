@@ -250,7 +250,7 @@ const ProductPictogram = ({ product }: { product: Product }) => {
 
 
 // --- Cinematic Panning Component (Scroll Linked) ---
-const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: string; subtitle: string }> = ({ image, mobileImage, title, subtitle }) => {
+const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; alt?: string; title: string; subtitle: string }> = ({ image, mobileImage, alt, title, subtitle }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -294,8 +294,8 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
             {mobileImage && <source media="(max-width: 768px)" srcSet={mobileImage} />}
             <img 
               ref={imageRef}
-              src={image} 
-              alt="Material Detail" 
+              src={image}
+              alt={alt || title || 'Material Detail'}
               className="w-full h-full object-cover opacity-80 will-change-transform"
               style={{ transform: 'scale(1.3)' }} 
             />
@@ -315,7 +315,7 @@ const CinematicMaterial: React.FC<{ image: string; mobileImage?: string; title: 
 
 // --- Page Sections ---
 
-const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> = ({ onExplore, onOpenMenu }) => (
+const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
   <div className="w-full bg-[#110614] text-white">
       {/* Hero Section */}
       <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden py-24">
@@ -327,7 +327,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
             
             <FadeIn delay={600}>
                 <div className="mt-12">
-                <Button primary onClick={onExplore}>
+                <Button primary onClick={onOpenMenu}>
                     Utforsk utvalget
                 </Button>
                 </div>
@@ -343,8 +343,8 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
          <div className="sticky top-0 h-screen w-full md:relative md:h-full md:w-1/2 md:order-2 z-0 md:p-8">
             <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
               <ResponsiveImage 
-                desktopSrc="/images/nattbord_fjæra.jpg" 
-                mobileSrc="/images/nattbord_fjæra.jpg" 
+                desktopSrc="/images/brand/A-homepage-banner-desktop-nm-Gruppe-18686.jpg"
+                mobileSrc="/images/brand/A-homepage-banner-mobile-nm-Gruppe-18686.jpg"
                 alt="Craftsman at work"
                 className="h-full w-full object-cover"
               />
@@ -362,7 +362,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
                    </p>
                    <div className="flex flex-col sm:flex-row gap-4">
                      <Button onClick={onOpenMenu}>Utforsk mer</Button>
-                     <Button primary href={COLLECTION[0].shopifyLink}>Tilpass din</Button>
+                     <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
             </div>
@@ -374,8 +374,8 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
          <div className="sticky top-0 h-screen w-full md:relative md:h-full md:w-1/2 z-0 md:p-8">
              <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
                 <ResponsiveImage 
-                  desktopSrc="/images/vintereik.jpg" 
-                  mobileSrc="/images/vintereik.jpg" 
+                  desktopSrc="/images/brand/B-desktop-quer-T2A9853.jpg"
+                  mobileSrc="/images/brand/B-mobil-quadratisch-T2A9853.jpg"
                   alt="Norwegian Forest"
                   className="h-full w-full object-cover"
                 />
@@ -398,7 +398,7 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
                    </ul>
                    <div className="flex flex-col sm:flex-row gap-4">
                      <Button onClick={onOpenMenu}>Utforsk mer</Button>
-                     <Button primary href={COLLECTION[0].shopifyLink}>Tilpass din</Button>
+                     <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
             </div>
@@ -406,6 +406,14 @@ const LandingPage: React.FC<{ onExplore: () => void; onOpenMenu: () => void }> =
       </div>
   </div>
 );
+
+// Default info blocks. Used for any product that doesn't define its own `specs`.
+// To override for a single product, add a `specs: [...]` array to that product in collection.ts.
+const DEFAULT_SPECS: { header: string; tagline?: string; body: string }[] = [
+  { header: 'Norske råvarer', tagline: 'bærekraft er ikke et slagord ', body: 'Hvert nattbord skjæres fra én eikeplanke fra Sør-Agder. Vi tørker treet selv. Ekte natur og bøffelskinn ved sengen.' },
+  { header: 'Form & Håndverk', tagline: 'fordi detaljene faktisk betyr alt', body: 'Vi bygger kun 40 møbler i året. Nattbordets avrundede hjørner og tette sammenføyninger freses fra massiv eik med kompromissløs presisjon.' },
+  { header: 'Livsløp & Bruk', tagline: 'Mitt øyeblikk. Din evighet. ', body: 'Nattbordet er like stramt bakfra som forfra. Sett det fritt i rommet, eller sitt på det. Bygget for generasjoner.' },
+];
 
 // --- PRODUCT EXPERIENCE (Formerly NattbordExperience) ---
 // This is now the universal layout for "Premium" products.
@@ -472,6 +480,26 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Unfinished products: keep the SVG animation, show only a "coming soon" disclaimer.
+  if (product.comingSoon) {
+    return (
+      <div className="bg-[#110614] text-white w-full relative min-h-screen flex flex-col items-center justify-center px-6">
+        <ProductPictogram product={product} />
+        <FadeIn delay={300}>
+          <h1 className="text-6xl md:text-9xl font-bold tracking-tight mb-4 text-center font-ubuntu lowercase">
+            {product.name}
+          </h1>
+          <div className="h-1 w-24 bg-white/20 mx-auto rounded-full"></div>
+        </FadeIn>
+        <FadeIn delay={500}>
+          <p className="mt-10 text-2xl md:text-3xl font-light text-gray-200 text-center max-w-2xl font-ubuntu">
+            Her kommer interiøravdelingen til nordlys møbler
+          </p>
+        </FadeIn>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#110614] text-white w-full relative">
       {/* 1. Title Screen */}
@@ -501,9 +529,9 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
           <div className="sticky top-0 h-screen w-full md:relative md:h-full md:w-1/2 z-0 md:p-8">
              <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
                 <ResponsiveImage 
-                    desktopSrc={product.detailImage2} 
-                    mobileSrc={product.detailImage2Mobile}
-                    alt="Lifestyle" 
+                    desktopSrc={product.pictureA}
+                    mobileSrc={product.pictureAMobile}
+                    alt={product.pictureAAlt || product.name}
                     className="h-full w-full object-cover"
                 />
              </div>
@@ -514,12 +542,18 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
           <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-end md:justify-center p-6 pb-24 md:p-24 md:pb-0 h-full md:min-h-auto bg-transparent md:bg-[#110614] pointer-events-none md:pointer-events-auto">
              <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
                  <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"{product.text1}"</h3>
+                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                    <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                    <Button primary href={product.shopifyLink}>
+                        Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                 </div>
              </div>
           </div>
       </div>
 
-      {/* 2. Layered Scrollytelling Section */}
-      {/* This container must act as the track for sticky elements */}
+      {/* 2. Feature Section: sticky 3D-model scrollytelling when a model exists, otherwise a normal picture section */}
+      {product.modelPath ? (
       <div ref={containerRef} className="relative w-full">
         
         {/* STICKY MODEL LAYER */}
@@ -556,9 +590,9 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                      </Canvas>
                   ) : (
                      <ResponsiveImage
-                        desktopSrc={product.heroImage}
-                        mobileSrc={product.heroImageMobile}
-                        alt={product.name}
+                        desktopSrc={product.pictureB}
+                        mobileSrc={product.pictureBMobile}
+                        alt={product.pictureBAlt || product.name}
                         className="h-full w-full object-cover"
                      />
                   )}
@@ -606,18 +640,50 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
             <div className="md:hidden h-[100vh] w-full pointer-events-none"></div>
         </div>
       </div>
+      ) : (
+      <div className="relative min-h-[140vh] md:min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
+         {/* Image Layer - Right on Desktop */}
+         <div className="sticky top-0 h-screen w-full md:relative md:h-full md:w-1/2 z-0 md:order-2 md:p-8">
+            <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
+              <ResponsiveImage
+                  desktopSrc={product.pictureB}
+                  mobileSrc={product.pictureBMobile}
+                  alt={product.pictureBAlt || product.name}
+                  className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 bg-black/20 md:hidden"></div>
+         </div>
+
+         {/* Text Layer - Left on Desktop */}
+         <div className="relative z-10 w-full md:w-1/2 md:order-1 flex flex-col justify-end md:justify-center p-6 pb-24 md:p-24 md:pb-0 h-full md:min-h-auto bg-transparent md:bg-[#110614] pointer-events-none md:pointer-events-auto">
+             <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
+                 <h2 className="text-4xl font-bold mb-6 font-ubuntu">{feat1}.</h2>
+                 <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
+                     {product.text2}
+                 </p>
+                 <div className="flex flex-col sm:flex-row gap-4">
+                    <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                    <Button primary href={product.shopifyLink}>
+                        Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                 </div>
+             </div>
+         </div>
+      </div>
+      )}
 
       {/* 3. Subsequent Content (Slides UP) */}
-      <div className="relative z-20 bg-[#110614] -mt-[100vh] md:mt-0">
+      <div className={`relative z-20 bg-[#110614] ${product.modelPath ? '-mt-[100vh] md:mt-0' : ''}`}>
             {/* Block 2: Feature 2 (Image Left | Text Right) */}
             <div className="relative min-h-[140vh] md:min-h-screen w-full flex flex-col md:flex-row bg-[#110614]">
                {/* Image Layer - Left on Desktop */}
                <div className="sticky top-0 h-screen w-full md:relative md:h-full md:w-1/2 z-0 md:order-1 md:p-8">
                   <div className="w-full h-full md:rounded-2xl overflow-hidden shadow-2xl relative">
                     <ResponsiveImage 
-                        desktopSrc={product.heroImage} 
-                        mobileSrc={product.heroImageMobile}
-                        alt="Hero" 
+                        desktopSrc={product.pictureC}
+                        mobileSrc={product.pictureCMobile}
+                        alt={product.pictureCAlt || product.name}
                         className="h-full w-full object-cover"
                     />
                   </div>
@@ -644,34 +710,27 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
             </div>
 
             {/* Block 3: Cinematic Material Detail (Scroll Linked) */}
-            <CinematicMaterial 
-                image="/images/nm34L_close_up.jpg" // Placeholder image for all products for now
-                mobileImage="/images/close_up.jpg" 
-                title="Presisjonsarbeid" 
-                subtitle="Detaljer" 
+            <CinematicMaterial
+                image={product.detailImage ?? '/images/shared/lifestyle/nm34L_close_up.jpg'}
+                mobileImage={product.detailImageMobile ?? '/images/shared/lifestyle/close_up.jpg'}
+                alt={product.detailImageAlt}
+                title="Presisjonsarbeid"
+                subtitle="Detaljer"
             />
 
       </div>
 
       {/* 4. Specs / Detail Grid (Placeholder Specs) */}
       <div className="py-32 px-6 max-w-7xl mx-auto bg-[#110614] relative z-20">
-        <h3 className="text-4xl font-ubuntu mb-16 text-center">Technical Specifications</h3>
+        <h3 className="text-4xl font-ubuntu mb-16 text-center">Core Principles</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
-                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Dimensions</h4>
-                <p className="text-3xl font-light">Customizable</p>
-                <p className="text-sm text-gray-500 mt-2">Width x Depth x Height</p>
-            </div>
-            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
-                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Material</h4>
-                <p className="text-3xl font-light">Solid Oak</p>
-                <p className="text-sm text-gray-500 mt-2">FSC Certified</p>
-            </div>
-            <div className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
-                <h4 className="text-gray-400 uppercase tracking-widest text-xs mb-4">Weight</h4>
-                <p className="text-3xl font-light">-- kg</p>
-                <p className="text-sm text-gray-500 mt-2">Solid construction</p>
-            </div>
+            {(product.specs ?? DEFAULT_SPECS).map((spec, i) => (
+                <div key={i} className="bg-[#1a0c1e] p-10 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                    <h4 className="text-2xl font-ubuntu font-light mb-3">{spec.header}</h4>
+                    {spec.tagline && <p className="text-amber-500 uppercase tracking-widest text-xs font-bold mb-4">{spec.tagline}</p>}
+                    <p className="text-sm text-gray-400 leading-relaxed">{spec.body}</p>
+                </div>
+            ))}
         </div>
       </div>
       
@@ -720,9 +779,9 @@ const updateMetaTags = (product: Product | null) => {
       ? `${product.description} ${product.price}.`
       : product.description;
     const url = `${base}/${product.id}`;
-    const image = product.heroImage.startsWith('http')
-      ? product.heroImage
-      : `${base}${product.heroImage}`;
+    const image = product.pictureA.startsWith('http')
+      ? product.pictureA
+      : `${base}${product.pictureA}`;
 
     document.title = title;
     setMeta('description', desc);
@@ -926,23 +985,23 @@ export default function App() {
             <X size={32} />
         </button>
 
-        <div className="h-full w-full flex flex-col justify-evenly items-start py-12 pl-6 md:pl-12 pr-4">
-            <button 
-                onClick={navigateHome} 
-                className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu uppercase bg-transparent border-none cursor-pointer transition-all duration-300 ${
+        <div className="h-full w-full flex flex-col justify-evenly items-start pt-[3vh] pb-[13vh] pl-6 md:pl-12 pr-4 overflow-hidden">
+            <button
+                onClick={navigateHome}
+                className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu uppercase whitespace-nowrap bg-transparent border-none cursor-pointer transition-all duration-300 ${
                     !activeProduct ? 'text-white underline decoration-2 underline-offset-8' : 'text-gray-400 hover:text-white hover:scale-105 origin-left'
                 }`}
             >
                 Home
             </button>
-            
+
             {COLLECTION.map(item => (
-                <button 
+                <button
                     key={item.id}
                     onClick={() => navigateToProduct(item)}
-                    className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu lowercase bg-transparent border-none cursor-pointer transition-all duration-300 ${
-                        activeProduct?.id === item.id 
-                        ? 'text-white underline decoration-2 underline-offset-8' 
+                    className={`menu-text-responsive flex items-center justify-start text-left font-ubuntu lowercase whitespace-nowrap bg-transparent border-none cursor-pointer transition-all duration-300 ${
+                        activeProduct?.id === item.id
+                        ? 'text-white underline decoration-2 underline-offset-8'
                         : 'text-gray-400 hover:text-white hover:scale-105 origin-left'
                     }`}
                 >
@@ -957,7 +1016,7 @@ export default function App() {
         {activeProduct ? (
           <ProductExperience key={activeProduct.id} product={activeProduct} onOpenMenu={openMenu} />
         ) : (
-          <LandingPage onExplore={() => navigateToProduct(COLLECTION[0])} onOpenMenu={openMenu} />
+          <LandingPage onOpenMenu={openMenu} />
         )}
       </main>
 
