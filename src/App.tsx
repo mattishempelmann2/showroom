@@ -67,7 +67,7 @@ const ResponsiveImage: React.FC<{
   );
 };
 
-const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, className = '' }) => {
+const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, target, rel, className = '' }) => {
   const baseClass = "appearance-none inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-[12px] tracking-wide cursor-pointer whitespace-nowrap";
   const primaryClass = "!bg-white !text-black hover:!bg-gray-200 !border !border-transparent";
   const secondaryClass = "!bg-transparent !text-white !border !border-white/30 hover:!bg-white/10 backdrop-blur-sm";
@@ -80,6 +80,10 @@ const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, class
   };
 
   if (href) props.href = href;
+  if (target) props.target = target;
+  // Default to a safe rel when opening in a new tab, unless one is provided.
+  if (target === '_blank') props.rel = rel ?? 'noopener noreferrer';
+  else if (rel) props.rel = rel;
 
   return React.createElement(Component, props, children);
 };
@@ -361,7 +365,7 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                       Hos nordlys møbler møter skandinavisk design et kompromissløst håndverk. Med et tydelig nikk til 70-talls retro og tidløse, avrundede former, skaper vi objekter i massiv eik. Ingen masseproduksjon, bare ærlige møbler bygget for å passe inn overalt og tåle hverdagens bruk i generasjoner.
                    </p>
                    <div className="flex flex-col sm:flex-row gap-4">
-                     <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                     <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                      <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
@@ -397,7 +401,7 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                       <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Produsert i et "knøttlite" verksted ute i havgapet på Vikna</li>
                    </ul>
                    <div className="flex flex-col sm:flex-row gap-4">
-                     <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                     <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                      <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
@@ -543,7 +547,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
              <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
                  <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"{product.text1}"</h3>
                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                    <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                    <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                     <Button primary href={product.shopifyLink}>
                         Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -569,7 +573,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                         {product.text2}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                        <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                         <Button primary href={product.shopifyLink}>
                             Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -625,7 +629,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                             {product.text2}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full">
-                            <Button onClick={onOpenMenu} className="w-full">Utforsk mer</Button>
+                            <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank" className="w-full">Utforsk mer</Button>
                             <Button primary href={product.shopifyLink} className="w-full">
                                 Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
@@ -663,7 +667,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                      {product.text2}
                  </p>
                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                    <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                     <Button primary href={product.shopifyLink}>
                         Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -700,7 +704,7 @@ const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> 
                         <p className="text-lg italic text-white/60 mb-8">"{product.tagline2}"</p>
                         
                         <div className="flex flex-col sm:flex-row gap-4">
-                           <Button onClick={onOpenMenu}>Utforsk mer</Button>
+                           <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
                            <Button primary href={product.shopifyLink}>
                                Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
                            </Button>

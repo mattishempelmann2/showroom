@@ -42,6 +42,8 @@ export interface ButtonProps {
   primary?: boolean;
   onClick?: () => void;
   href?: string;
+  target?: string;
+  rel?: string;
   className?: string;
 }
 
