@@ -422,7 +422,7 @@ const DEFAULT_SPECS: { header: string; tagline?: string; body: string }[] = [
 // --- PRODUCT EXPERIENCE (Formerly NattbordExperience) ---
 // This is now the universal layout for "Premium" products.
 // It adapts based on the 'product' prop passed to it.
-const ProductExperience: React.FC<{ product: Product; onOpenMenu: () => void }> = ({ product, onOpenMenu }) => {
+const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotationProgress, setRotationProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -1018,7 +1018,7 @@ export default function App() {
       {/* Main Content */}
       <main className="w-full">
         {activeProduct ? (
-          <ProductExperience key={activeProduct.id} product={activeProduct} onOpenMenu={openMenu} />
+          <ProductExperience key={activeProduct.id} product={activeProduct} />
         ) : (
           <LandingPage onOpenMenu={openMenu} />
         )}
