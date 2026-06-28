@@ -972,7 +972,7 @@ export default function App() {
             nordlys møbler
           </button>
           <div className="flex items-center justify-end z-50">
-             <a href={activeProduct?.shopifyLink || "#"} className={`text-white p-2 hover:text-gray-300 transition-all duration-500 ease-out transform ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`} aria-label="Shop">
+             <a href={activeProduct?.shopifyLink || "https://www.nordlys-moebler.no"} className={`text-white p-2 hover:text-gray-300 transition-all duration-500 ease-out transform ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`} aria-label="Shop">
                 <ShoppingBag size={28} />
              </a>
           </div>

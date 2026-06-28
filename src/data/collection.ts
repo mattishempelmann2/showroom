@@ -102,8 +102,8 @@ export const COLLECTION: Product[] = [
     pictureBAlt: 'Close-up detail of a handcrafted dovetail joint on a nordlys møbler side-mounted leg, inspired by 1950s Scandinavian woodworking details. Built from raw Norwegian oak. HANDMADE - SCANDINAVIAN - FURNITURE.',
     pictureCAlt: 'Workshop detail: Furniture parts prepared for fine sanding and oiling. nordlys møbler: HANDMADE - SCANDINAVIAN - FURNITURE from Norwegian oak.',
     features: ['50-talls elementer', 'rett ved fjorden', 'Linoleum Top'],
-    detailImage: '/images/shared/textures/detail-B-IMG-E2576.JPG',
-    detailImageMobile: '/images/shared/textures/detail-B-IMG-E2576.JPG',
+    detailImage: '/images/shared/textures/detail-A-0342.jpg',
+    detailImageMobile: '/images/shared/textures/detail-A-0342.jpg',
     detailImageAlt: '',
     specs: [
       { header: 'Norske råvarer', tagline: 'bærekraft er ikke et slagord ', body: 'Pult og benk skapes fra én lang, nøye utvalgt eikeplanke fra Sør-Agder. Vi tørker treet selv. Ekte naturmaterialer som krever og fortjener din oppmerksomhet.' },
