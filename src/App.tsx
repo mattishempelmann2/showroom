@@ -69,8 +69,8 @@ const ResponsiveImage: React.FC<{
 
 const Button: React.FC<ButtonProps> = ({ children, primary, onClick, href, className = '' }) => {
   const baseClass = "appearance-none inline-flex items-center justify-center px-8 py-4 text-sm font-medium transition-all duration-300 rounded-[12px] tracking-wide cursor-pointer whitespace-nowrap";
-  const primaryClass = "!bg-white !text-black hover:!bg-gray-200 border border-transparent";
-  const secondaryClass = "bg-transparent text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm";
+  const primaryClass = "!bg-white !text-black hover:!bg-gray-200 !border !border-transparent";
+  const secondaryClass = "!bg-transparent !text-white !border !border-white/30 hover:!bg-white/10 backdrop-blur-sm";
   
   const Component = href ? 'a' : 'button';
   
