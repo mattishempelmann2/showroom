@@ -1030,9 +1030,19 @@ export default function App() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase">
             <p>&copy; 2026 nordlys møbler</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">Instagram</a>
-              <a href="#" className="hover:text-white transition-colors">Pinterest</a>
-              <a href="#" className="hover:text-white transition-colors">Contact</a>
+              <a href="https://www.instagram.com/nordlysmoebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Address is assembled at click time so it never appears in the
+                  // static/prerendered HTML, reducing spam-scraper harvesting.
+                  window.location.href = `mailto:${['contact', 'nordlys-moebler.no'].join('@')}`;
+                }}
+                className="hover:text-white transition-colors"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </footer>
