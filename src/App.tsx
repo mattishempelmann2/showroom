@@ -350,7 +350,7 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                 desktopSrc="/images/brand/A-homepage-banner-desktop-nm-Gruppe-18686.jpg"
                 mobileSrc="/images/brand/A-homepage-banner-mobile-nm-Gruppe-18686.jpg"
                 alt="Craftsman at work"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain md:object-cover"
               />
             </div>
             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
@@ -381,7 +381,7 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                   desktopSrc="/images/brand/B-desktop-quer-T2A9853.jpg"
                   mobileSrc="/images/brand/B-mobil-quadratisch-T2A9853.jpg"
                   alt="Norwegian Forest"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain md:object-cover"
                 />
              </div>
             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
@@ -536,7 +536,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                     desktopSrc={product.pictureA}
                     mobileSrc={product.pictureAMobile}
                     alt={product.pictureAAlt || product.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain md:object-cover"
                 />
              </div>
              <div className="absolute inset-0 bg-black/20 md:hidden"></div>
@@ -597,7 +597,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                         desktopSrc={product.pictureB}
                         mobileSrc={product.pictureBMobile}
                         alt={product.pictureBAlt || product.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain md:object-cover"
                      />
                   )}
                   
@@ -653,7 +653,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                   desktopSrc={product.pictureB}
                   mobileSrc={product.pictureBMobile}
                   alt={product.pictureBAlt || product.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain md:object-cover"
               />
             </div>
             <div className="absolute inset-0 bg-black/20 md:hidden"></div>
@@ -688,7 +688,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                         desktopSrc={product.pictureC}
                         mobileSrc={product.pictureCMobile}
                         alt={product.pictureCAlt || product.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain md:object-cover"
                     />
                   </div>
                   <div className="absolute inset-0 bg-black/20 md:hidden"></div>
