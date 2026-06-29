@@ -1028,7 +1028,10 @@ export default function App() {
       {!activeProduct && (
         <footer className="bg-[#110614] text-gray-500 py-12 px-6 border-t border-white/10 w-full">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase">
-            <p>&copy; 2026 nordlys møbler</p>
+            <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
+              <p>&copy; {new Date().getFullYear()} NO-DESIGN HEMPELMANN. Med enerett.</p>
+              <p className="text-gray-600">Org.nr: 926 576 860</p>
+            </div>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="https://www.instagram.com/nordlysmoebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
               <a href="https://no.pinterest.com/nordlys_moebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Pinterest</a>
