@@ -1031,6 +1031,7 @@ export default function App() {
             <p>&copy; 2026 nordlys møbler</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="https://www.instagram.com/nordlysmoebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+              <a href="https://no.pinterest.com/nordlys_moebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Pinterest</a>
               <a
                 href="#"
                 onClick={(e) => {
