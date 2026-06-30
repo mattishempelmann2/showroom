@@ -1024,13 +1024,12 @@ export default function App() {
         )}
       </main>
 
-      {/* Simple Footer */}
-      {!activeProduct && (
-        <footer className="bg-[#110614] text-gray-500 py-12 px-6 border-t border-white/10 w-full">
+      {/* Simple Footer (shown on every page) */}
+      <footer className="bg-[#110614] text-gray-500 py-12 px-6 border-t border-white/10 w-full">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase">
             <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
-              <p>&copy; {new Date().getFullYear()} NO-DESIGN HEMPELMANN. Med enerett.</p>
-              <p className="text-gray-600">Org.nr: 926 576 860</p>
+              <p>&copy; {new Date().getFullYear()} YTRE NAMDAL SNEKKERI AS. Med enerett.</p>
+              <p className="text-gray-600">Org.nr: 997 569 598</p>
             </div>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="https://www.instagram.com/nordlysmoebler/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
@@ -1050,7 +1049,6 @@ export default function App() {
             </div>
           </div>
         </footer>
-      )}
     </div>
   );
 }
