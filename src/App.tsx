@@ -491,6 +491,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
 
   // Primary CTA: opens the contact email (ctaEmail) or links to the product's store page.
   const renderCta = (opts?: { className?: string; withArrow?: boolean }) => {
+    if (product.hideCta) return null;
     const label = product.ctaLabel ?? 'Tilpass din';
     const withArrow = opts?.withArrow ?? true;
     const content = withArrow ? <>{label} <ArrowRight className="ml-2 h-4 w-4" /></> : label;

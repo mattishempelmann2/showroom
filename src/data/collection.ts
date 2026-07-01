@@ -37,6 +37,7 @@ export interface Product {
   comingSoon?: boolean;
   ctaLabel?: string;   // primary CTA text; defaults to "Tilpass din"
   ctaEmail?: boolean;  // if true, the CTA opens the contact email instead of linking to shopifyLink
+  hideCta?: boolean;   // if true, the primary CTA button is not rendered
 }
 
 export interface ButtonProps {
@@ -292,6 +293,7 @@ export const COLLECTION: Product[] = [
     },
   {
     id: 'om-oss',
+    hideCta: true,
     name: 'Om oss',
     type: 'Our Story',
     tagline: 'Ett verksted, én mann og tilfeldig luksus fra kanten av fjorden.',
