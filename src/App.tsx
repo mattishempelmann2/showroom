@@ -365,8 +365,8 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                       Hos nordlys møbler møter skandinavisk design et kompromissløst håndverk. Med et tydelig nikk til 70-talls retro og tidløse, avrundede former, skaper vi objekter i massiv eik. Ingen masseproduksjon, bare ærlige møbler bygget for å passe inn overalt og tåle hverdagens bruk i generasjoner.
                    </p>
                    <div className="flex flex-col sm:flex-row gap-4">
-                     <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                     <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
+                     <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                     <Button primary href="https://shop.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
             </div>
@@ -401,8 +401,8 @@ const LandingPage: React.FC<{ onOpenMenu: () => void }> = ({ onOpenMenu }) => (
                       <li className="flex items-center"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-3"></div>Produsert i et "knøttlite" verksted ute i havgapet på Vikna</li>
                    </ul>
                    <div className="flex flex-col sm:flex-row gap-4">
-                     <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                     <Button primary href="https://www.nordlys-moebler.no">Tilpass din</Button>
+                     <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                     <Button primary href="https://shop.nordlys-moebler.no">Tilpass din</Button>
                    </div>
                 </FadeIn>
             </div>
@@ -484,6 +484,21 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Address is assembled at click time so it never appears in the static/prerendered HTML.
+  const openContactEmail = () => {
+    window.location.href = `mailto:${['contact', 'nordlys-moebler.no'].join('@')}`;
+  };
+
+  // Primary CTA: opens the contact email (ctaEmail) or links to the product's store page.
+  const renderCta = (opts?: { className?: string; withArrow?: boolean }) => {
+    const label = product.ctaLabel ?? 'Tilpass din';
+    const withArrow = opts?.withArrow ?? true;
+    const content = withArrow ? <>{label} <ArrowRight className="ml-2 h-4 w-4" /></> : label;
+    return product.ctaEmail
+      ? <Button primary onClick={openContactEmail} className={opts?.className ?? ''}>{content}</Button>
+      : <Button primary href={product.shopifyLink} className={opts?.className ?? ''}>{content}</Button>;
+  };
+
   // Unfinished products: keep the SVG animation, show only a "coming soon" disclaimer.
   if (product.comingSoon) {
     return (
@@ -547,10 +562,8 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
              <div className="w-full bg-black/30 backdrop-blur-lg md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-none pointer-events-auto">
                  <h3 className="text-2xl font-light italic text-gray-200 font-ubuntu">"{product.text1}"</h3>
                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                    <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                    <Button primary href={product.shopifyLink}>
-                        Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                    {renderCta()}
                  </div>
              </div>
           </div>
@@ -573,10 +586,8 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                         {product.text2}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                        <Button primary href={product.shopifyLink}>
-                            Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+                        <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                        {renderCta()}
                     </div>
                </div>
            </div>
@@ -629,10 +640,8 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                             {product.text2}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full">
-                            <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank" className="w-full">Utforsk mer</Button>
-                            <Button primary href={product.shopifyLink} className="w-full">
-                                Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
+                            <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank" className="w-full">Utforsk mer</Button>
+                            {renderCta({ className: 'w-full' })}
                         </div>
                      </div>
                  </div>
@@ -667,10 +676,8 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                      {product.text2}
                  </p>
                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                    <Button primary href={product.shopifyLink}>
-                        Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                    {renderCta()}
                  </div>
              </div>
          </div>
@@ -704,10 +711,8 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
                         <p className="text-lg italic text-white/60 mb-8">"{product.tagline2}"</p>
                         
                         <div className="flex flex-col sm:flex-row gap-4">
-                           <Button href="https://www.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
-                           <Button primary href={product.shopifyLink}>
-                               Tilpass din <ArrowRight className="ml-2 h-4 w-4" />
-                           </Button>
+                           <Button href="https://shop.nordlys-moebler.no/#systemgrafik" target="_blank">Utforsk mer</Button>
+                           {renderCta()}
                         </div>
                      </div>
                </div>
@@ -740,7 +745,7 @@ const ProductExperience: React.FC<{ product: Product }> = ({ product }) => {
       
       {/* 5. Final CTA */}
       <div className="pb-32 text-center bg-[#110614] relative z-20">
-         <Button primary href={product.shopifyLink}>Tilpass din</Button>
+         {renderCta({ withArrow: false })}
       </div>
     </div>
   );
@@ -976,7 +981,7 @@ export default function App() {
             nordlys møbler
           </button>
           <div className="flex items-center justify-end z-50">
-             <a href={activeProduct?.shopifyLink || "https://www.nordlys-moebler.no"} className={`text-white p-2 hover:text-gray-300 transition-all duration-500 ease-out transform ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`} aria-label="Shop">
+             <a href={activeProduct?.shopifyLink || "https://shop.nordlys-moebler.no"} className={`text-white p-2 hover:text-gray-300 transition-all duration-500 ease-out transform ${scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`} aria-label="Shop">
                 <ShoppingBag size={28} />
              </a>
           </div>
